@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "dev:css": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/main.css --watch",
-  "dev:hugo": "hugo server --disableFastRender",
-  "dev": "concurrently \"npm:dev:css\" \"npm:dev:hugo\"",
-  "build:css": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/main.css --minify",
-  "build:hugo": "hugo --minify",
-  "build": "npm run build:css && npm run build:hugo"
-},
+    "dev:css": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/main.css --watch",
+    "dev:hugo": "hugo server --disableFastRender",
+    "dev": "concurrently \"npm:dev:css\" \"npm:dev:hugo\"",
+    "build:css": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/main.css --minify",
+    "build:hugo": "hugo --minify",
+    "build": "npm run build:css && npm run build:hugo",
+    "sync:notion": "node scripts/sync-notion.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,5 +20,10 @@
     "@tailwindcss/cli": "^4.3.3",
     "concurrently": "^10.0.5",
     "tailwindcss": "^4.3.3"
+  },
+  "dependencies": {
+    "@notionhq/client": "^5.26.0",
+    "dotenv": "^18.0.3",
+    "sharp": "^0.35.4"
   }
 }

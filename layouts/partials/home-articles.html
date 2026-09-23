@@ -106,9 +106,24 @@
 
             {{ with .Params.thumbnail }}
 
+              {{ $thumb := . }}
+              {{ $base := strings.TrimSuffix "-960.webp" $thumb }}
+
               <img
-                src="{{ . }}"
-                alt=""
+                src="{{ $thumb }}"
+                srcset="
+                  {{ $base }}-640.webp 640w,
+                  {{ $base }}-960.webp 960w,
+                  {{ $base }}-1280.webp 1280w
+                "
+                sizes="
+                  (max-width: 767px) calc(100vw - 32px),
+                  (max-width: 1023px) 50vw,
+                  360px
+                "
+                width="1280"
+                height="720"
+                alt="{{ $.Title }}"
                 loading="lazy"
                 decoding="async"
                 class="
