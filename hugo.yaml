@@ -1,5 +1,5 @@
 baseURL: "https://masjidalfath.org/"
-languageCode: "id-ID"
+locale: "id-ID"
 title: "Masjid Al-Fath"
 
 enableRobotsTXT: true

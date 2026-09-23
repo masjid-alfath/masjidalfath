@@ -1,0 +1,17 @@
+- title: "Belajar dan bertumbuh bersama ilmu."
+  category: "Kajian & Pendidikan"
+  description: "Majelis Taklim, Fiqih Wanita, Pejuang Husnul Khotimah, Bahasa Arab, DUTA, dan program pembinaan lainnya."
+  accent: "cyan"
+  url: "/program/"
+
+- title: "Hadir untuk kebutuhan jamaah."
+  category: "Layanan Jamaah"
+  description: "Layanan Quranic Care, Ruqyah Syar'iyyah, Jumat Kasep, serta layanan jamaah lainnya."
+  accent: "violet"
+  url: "/program/"
+
+- title: "Menebarkan manfaat lebih luas."
+  category: "Sosial & Sedekah"
+  description: "Sedekah Jumat, Sedekah Makan Santri, Sedekah Buku, dan berbagai gerakan sosial Masjid Al-Fath."
+  accent: "coral"
+  url: "/program/"

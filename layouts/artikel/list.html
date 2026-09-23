@@ -1,0 +1,141 @@
+{{ define "main" }}
+
+<section class="py-20 lg:py-28">
+  <div class="container-site">
+
+    <p class="eyebrow text-aurora-cyan">
+      Ilmu &amp; Inspirasi
+    </p>
+
+    <h1
+      class="
+        mt-3
+        text-4xl
+        font-bold
+        tracking-[-0.04em]
+        lg:text-5xl
+      "
+    >
+      Artikel
+    </h1>
+
+    <p
+      class="
+        mt-5
+        max-w-2xl
+        text-base
+        leading-[1.8]
+        text-muted
+      "
+    >
+      {{ .Description }}
+    </p>
+
+
+    <div
+      class="
+        mt-12
+        grid
+        gap-x-6 gap-y-12
+        md:grid-cols-2
+        lg:grid-cols-3
+      "
+    >
+
+      {{ range .Pages.ByDate.Reverse }}
+
+        <article class="group">
+
+          <a
+            href="{{ .RelPermalink }}"
+            class="
+              block
+              overflow-hidden
+              rounded-[20px]
+              border border-white/[0.08]
+              bg-card
+            "
+          >
+
+            {{ with .Params.thumbnail }}
+
+              <img
+                src="{{ . }}"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="aspect-video h-auto w-full object-cover"
+              >
+
+            {{ else }}
+
+              <div
+                class="
+                  aspect-video
+                  bg-[radial-gradient(circle_at_10%_0%,rgb(102_201_255/0.20),transparent_40%),linear-gradient(135deg,#162331,#111620)]
+                "
+                aria-hidden="true"
+              ></div>
+
+            {{ end }}
+
+          </a>
+
+
+          <div class="mt-5">
+
+            {{ with index .Params.categories 0 }}
+              <p
+                class="
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.14em]
+                  text-aurora-cyan
+                "
+              >
+                {{ . }}
+              </p>
+            {{ end }}
+
+            <h2
+              class="
+                mt-3
+                text-xl
+                font-bold
+                leading-snug
+                tracking-[-0.025em]
+              "
+            >
+              <a
+                href="{{ .RelPermalink }}"
+                class="transition hover:text-aurora-cyan"
+              >
+                {{ .Title }}
+              </a>
+            </h2>
+
+            {{ with .Params.excerpt }}
+              <p class="mt-3 text-sm leading-6 text-muted">
+                {{ . }}
+              </p>
+            {{ end }}
+
+            <p class="mt-4 text-xs text-muted">
+              {{ .Date | time.Format ":date_long" }}
+              ·
+              {{ .ReadingTime }} menit baca
+            </p>
+
+          </div>
+
+        </article>
+
+      {{ end }}
+
+    </div>
+
+  </div>
+</section>
+
+{{ end }}

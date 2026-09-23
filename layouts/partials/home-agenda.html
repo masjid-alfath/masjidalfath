@@ -1,0 +1,222 @@
+<section
+  id="agenda"
+  class="border-y border-white/[0.07] bg-surface py-16 lg:py-20"
+>
+  <div class="container-site">
+
+    <div class="flex items-end justify-between gap-6">
+
+      <div>
+        <p class="eyebrow text-aurora-cyan">
+          Agenda Terdekat
+        </p>
+
+        <h2
+          class="
+            mt-3
+            text-3xl
+            font-bold
+            tracking-[-0.035em]
+            lg:text-4xl
+          "
+        >
+          Pekan ini di Al-Fath
+        </h2>
+      </div>
+
+      <a
+        href="/agenda/"
+        class="
+          hidden
+          items-center
+          gap-2
+          text-sm
+          font-semibold
+          text-aurora-cyan
+          transition
+          hover:text-white
+          sm:inline-flex
+        "
+      >
+        Lihat semua
+        <span aria-hidden="true">→</span>
+      </a>
+
+    </div>
+
+
+    <div
+      class="
+        mt-9
+        grid
+        gap-4
+        lg:grid-cols-3
+      "
+    >
+
+      {{ range first 3 hugo.Data.agenda }}
+
+        {{ $accent := "text-aurora-cyan" }}
+        {{ $border := "group-hover:border-aurora-cyan/30" }}
+        {{ $glow := "bg-aurora-cyan/10" }}
+
+        {{ if eq .accent "violet" }}
+          {{ $accent = "text-aurora-violet" }}
+          {{ $border = "group-hover:border-aurora-violet/30" }}
+          {{ $glow = "bg-aurora-violet/10" }}
+        {{ else if eq .accent "coral" }}
+          {{ $accent = "text-aurora-coral" }}
+          {{ $border = "group-hover:border-aurora-coral/30" }}
+          {{ $glow = "bg-aurora-coral/10" }}
+        {{ end }}
+
+        {{ $date := time.AsTime .date }}
+
+        <article
+          class="
+            group
+            relative
+            overflow-hidden
+            rounded-2xl
+            border border-white/[0.075]
+            bg-card
+            p-6
+            transition
+            duration-300
+            hover:-translate-y-1
+            {{ $border }}
+          "
+        >
+
+          <div
+            class="
+              pointer-events-none
+              absolute
+              -right-12 -top-12
+              size-32
+              rounded-full
+              blur-3xl
+              {{ $glow }}
+            "
+            aria-hidden="true"
+          ></div>
+
+
+          <div class="flex items-start gap-5">
+
+            <div class="shrink-0">
+              <p
+                class="
+                  text-3xl
+                  font-bold
+                  leading-none
+                  tracking-[-0.04em]
+                  {{ $accent }}
+                "
+              >
+                {{ $date.Format "02" }}
+              </p>
+
+              <p
+                class="
+                  mt-1
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.14em]
+                  text-muted
+                "
+              >
+                {{ $date.Format "Jan" }}
+              </p>
+            </div>
+
+
+            <div class="min-w-0">
+
+              <p
+                class="
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.14em]
+                  {{ $accent }}
+                "
+              >
+                {{ .day }}
+              </p>
+
+              <h3
+                class="
+                  mt-2
+                  text-lg
+                  font-bold
+                  leading-snug
+                  tracking-[-0.02em]
+                "
+              >
+                {{ .title }}
+              </h3>
+
+              <p
+                class="
+                  mt-2
+                  text-sm
+                  leading-6
+                  text-muted
+                "
+              >
+                {{ .topic }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="
+              mt-6
+              border-t border-white/[0.07]
+              pt-4
+              text-sm
+              text-muted
+            "
+          >
+
+            <p>
+              {{ .time }}
+            </p>
+
+            <p class="mt-1">
+              {{ .speaker }}
+            </p>
+
+          </div>
+
+        </article>
+
+      {{ end }}
+
+    </div>
+
+
+    <a
+      href="/agenda/"
+      class="
+        mt-7
+        inline-flex
+        items-center
+        gap-2
+        text-sm
+        font-semibold
+        text-aurora-cyan
+        sm:hidden
+      "
+    >
+      Lihat semua agenda
+      <span aria-hidden="true">→</span>
+    </a>
+
+  </div>
+</section>
