@@ -1,0 +1,23 @@
+{
+  "name": "masjid-alfath",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "dev:css": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/main.css --watch",
+  "dev:hugo": "hugo server --disableFastRender",
+  "dev": "concurrently \"npm:dev:css\" \"npm:dev:hugo\"",
+  "build:css": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/main.css --minify",
+  "build:hugo": "hugo --minify",
+  "build": "npm run build:css && npm run build:hugo"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "concurrently": "^10.0.5",
+    "tailwindcss": "^4.3.3"
+  }
+}

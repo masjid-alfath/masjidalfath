@@ -1,0 +1,8 @@
+baseURL: "https://masjidalfath.org/"
+languageCode: "id-ID"
+title: "Masjid Al-Fath"
+
+enableRobotsTXT: true
+
+params:
+  description: "Masjid Al-Fath — Pusat Dakwah Al-Qur'an dan Pembinaan Umat."

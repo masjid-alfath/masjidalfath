@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("alfath-theme");
+
+        if (savedTheme === "light") {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (_) {}
+    })();
+  </script>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    {{ if .IsHome }}
+      {{ site.Title }}
+    {{ else }}
+      {{ .Title }} — {{ site.Title }}
+    {{ end }}
+  </title>
+
+  <meta
+    name="description"
+    content="{{ site.Params.description }}"
+  >
+
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body class="min-h-screen">
+
+  {{ partial "navbar.html" . }}
+
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>
