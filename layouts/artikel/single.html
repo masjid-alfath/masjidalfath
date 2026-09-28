@@ -4,7 +4,7 @@
 
   <header class="container-site">
 
-    <div class="mx-auto max-w-3xl">
+    <div class="mx-auto max-w-4xl">
 
       {{ with index .Params.categories 0 }}
         <p class="eyebrow text-aurora-cyan">
@@ -75,7 +75,9 @@
 
   {{ with .Params.thumbnail }}
 
-    <div class="container-site mt-12">
+    <div class="container-site mt-10 lg:mt-12">
+
+      <div class="mx-auto max-w-4xl">
 
       <img
         src="{{ . }}"
@@ -89,6 +91,8 @@
           object-cover
         "
       >
+
+      </div>
 
     </div>
 

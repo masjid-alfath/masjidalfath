@@ -4,26 +4,63 @@ const menuIcon = document.getElementById("menu-icon");
 const closeIcon = document.getElementById("close-icon");
 
 if (menuButton && mobileMenu) {
-  menuButton.addEventListener("click", () => {
-    const isOpen =
-      menuButton.getAttribute("aria-expanded") === "true";
+  const mobileLinks = mobileMenu.querySelectorAll("a[href]");
 
-    menuButton.setAttribute(
-      "aria-expanded",
-      String(!isOpen)
-    );
-
-    mobileMenu.classList.toggle("hidden");
-
-    menuIcon?.classList.toggle("hidden");
-    closeIcon?.classList.toggle("hidden");
-
+  function setMenuState(open, { returnFocus = false } = {}) {
+    menuButton.setAttribute("aria-expanded", String(open));
     menuButton.setAttribute(
       "aria-label",
-      isOpen ? "Buka menu" : "Tutup menu"
+      open ? "Tutup menu" : "Buka menu"
     );
+
+    mobileMenu.setAttribute("aria-hidden", String(!open));
+    mobileMenu.classList.toggle("hidden", !open);
+
+    menuIcon?.classList.toggle("hidden", open);
+    closeIcon?.classList.toggle("hidden", !open);
+
+    if (returnFocus) {
+      menuButton.focus();
+    }
+  }
+
+  function isMenuOpen() {
+    return menuButton.getAttribute("aria-expanded") === "true";
+  }
+
+  menuButton.addEventListener("click", () => {
+    const nextState = !isMenuOpen();
+
+    setMenuState(nextState);
+
+    if (nextState) {
+      const activeLink =
+        mobileMenu.querySelector('[aria-current="page"]') ||
+        mobileMenu.querySelector("a[href]");
+
+      activeLink?.focus();
+    }
+  });
+
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      setMenuState(false);
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isMenuOpen()) {
+      setMenuState(false, { returnFocus: true });
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768 && isMenuOpen()) {
+      setMenuState(false);
+    }
   });
 }
+
 
 // ========================================
 // THEME
@@ -73,3 +110,44 @@ themeToggles.forEach((button) => {
 });
 
 updateThemeUI();
+
+
+/* ==========================================================
+   CONTENT COPY BUTTON
+   Notion [COPY:value] → clipboard
+   ========================================================== */
+
+document.querySelectorAll("[data-copy-value]").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const value = button.dataset.copyValue;
+
+    if (!value) return;
+
+    const label =
+      button.querySelector(".content-copy-label");
+
+    const success =
+      button.querySelector(".content-copy-success");
+
+    try {
+      await navigator.clipboard.writeText(value);
+
+      label?.classList.add("hidden");
+      success?.classList.remove("hidden");
+
+      button.classList.add("is-copied");
+
+      window.setTimeout(() => {
+        success?.classList.add("hidden");
+        label?.classList.remove("hidden");
+
+        button.classList.remove("is-copied");
+      }, 1800);
+
+    } catch (error) {
+      console.error("Gagal menyalin:", error);
+    }
+  });
+});
+
+

@@ -1,0 +1,259 @@
+<footer
+  class="
+    border-t border-white/[0.07]
+    bg-midnight
+  "
+>
+  <div class="container-site">
+
+    <!-- Main Footer -->
+
+    <div class="
+        grid
+        gap-12
+        py-14
+        md:grid-cols-2
+        lg:grid-cols-[1.3fr_0.6fr_0.7fr_1.3fr]
+        lg:py-16
+      ">
+
+      <!-- Brand -->
+
+      <div>
+
+        <a
+          href="/"
+          class="inline-flex items-center"
+          aria-label="Masjid Al-Fath — Beranda"
+        >
+          <img
+            src="/images/logo/logo-light.svg"
+            alt=""
+            width="220"
+            height="44"
+            class="block h-9 w-auto dark:hidden"
+          >
+          <img
+            src="/images/logo/logo-dark.svg"
+            alt=""
+            width="220"
+            height="44"
+            class="hidden h-9 w-auto dark:block"
+          >
+        </a>
+
+
+        <p
+          class="
+            mt-5
+            max-w-sm
+            text-sm
+            leading-[1.45]
+            text-muted
+          "
+        >
+          Pusat Dakwah Al-Qur'an dan Pembinaan Umat.
+          Hadir sebagai rumah bagi jamaah untuk beribadah,
+          belajar, dan bertumbuh bersama.
+        </p>
+
+      </div>
+
+
+      <!-- Explore -->
+
+      <div>
+
+        <p
+          class="
+            text-sm
+            font-bold
+            text-foreground
+          "
+        >
+          Jelajahi
+        </p>
+
+        <nav
+          class="
+            mt-4
+            flex
+            flex-col
+            items-start
+            gap-2.5
+          "
+          aria-label="Navigasi footer"
+        >
+          <a href="/program/" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
+            Program
+          </a>
+
+          <a href="/agenda/" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
+            Agenda
+          </a>
+
+          <a href="/artikel/" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
+            Artikel
+          </a>
+
+          <a href="/tentang/" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
+            Tentang
+          </a>
+        </nav>
+
+      </div>
+
+
+      <!-- ZISWAF -->
+
+      <div>
+
+        <p
+          class="
+            text-sm
+            font-bold
+            text-foreground
+          "
+        >
+          ZISWAF
+        </p>
+
+        <nav
+          class="
+            mt-4
+            flex
+            flex-col
+            items-start
+            gap-2.5
+          "
+          aria-label="Navigasi ZISWAF"
+        >
+          <a href="/ziswaf/#zakat" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
+            Zakat
+          </a>
+
+          <a href="/ziswaf/#infak-sedekah" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
+            Infak &amp; Sedekah
+          </a>
+
+          <a href="/ziswaf/#wakaf" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
+            Wakaf
+          </a>
+
+          <a href="/ziswaf/#dana-syubhat" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
+            Dana Syubhat
+          </a>
+        </nav>
+
+      </div>
+
+
+      <!-- Address -->
+
+      <div>
+
+        <p
+          class="
+            text-sm
+            font-bold
+            text-foreground
+          "
+        >
+          Lokasi
+        </p>
+
+        <address class="
+            mt-5
+            not-italic
+            text-sm
+            leading-[1.45]
+            text-muted
+          ">
+            Komple Bumi Panyileukan Jl. Sehati 9 No.11, Kelurahan Cipadung Kidul,
+            Panyileukan, Kota Bandung,
+            Jawa Barat 40614
+        </address>
+
+      </div>
+
+    </div>
+
+
+    <!-- Bottom Footer -->
+
+    <div
+      class="
+        flex
+        flex-col
+        gap-3
+        border-t border-white/[0.07]
+        py-6
+        text-xs
+        text-muted
+        sm:flex-row
+        sm:items-center
+        sm:justify-between
+      "
+    >
+
+      <p>
+        © {{ now.Year }} Masjid Al-Fath.
+        Semua hak dilindungi.
+      </p>
+
+      <p>
+        Bandung, Jawa Barat
+      </p>
+
+    </div>
+
+  </div>
+</footer>

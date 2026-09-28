@@ -1,6 +1,6 @@
 <section
   id="program"
-  class="py-20 lg:py-28"
+  class="py-16 lg:py-20"
 >
   <div
     class="
@@ -17,7 +17,7 @@
       <div class="lg:sticky lg:top-28">
 
         <p class="eyebrow text-aurora-violet">
-          Aktivitas Al-Fath
+          Program Al-Fath
         </p>
 
         <h2
@@ -31,9 +31,9 @@
             lg:text-4xl
           "
         >
-          Bertumbuh bersama
+          Temukan ruang
           <span class="aurora-text">
-            ilmu dan amal.
+            untuk bertumbuh.
           </span>
         </h2>
 
@@ -42,13 +42,13 @@
             mt-5
             max-w-md
             text-base
-            leading-[1.8]
+            leading-[1.55]
             text-muted
           "
         >
-          Beragam program dihadirkan untuk menemani
-          jamaah belajar, beribadah, dan menebarkan
-          manfaat bersama.
+          Program Al-Fath hadir dalam tiga ruang utama:
+          pembinaan ilmu, layanan jamaah, serta kegiatan
+          sosial dan sedekah.
         </p>
 
         <a
@@ -92,8 +92,16 @@
           {{ $iconbg = "bg-aurora-coral/10" }}
         {{ end }}
 
+        {{ $categoryURL := "/program/#kajian-pendidikan" }}
+
+        {{ if eq .category "Layanan Jamaah" }}
+          {{ $categoryURL = "/program/#layanan-jamaah" }}
+        {{ else if eq .category "Sosial & Sedekah" }}
+          {{ $categoryURL = "/program/#sosial-sedekah" }}
+        {{ end }}
+
         <a
-          href="{{ .url }}"
+          href="{{ $categoryURL }}"
           class="
             group
             surface-card

@@ -1,0 +1,419 @@
+{{ define "main" }}
+
+<section
+  class="
+    relative
+    overflow-hidden
+    border-b border-white/[0.07]
+    py-16
+    lg:py-20
+  "
+>
+
+  <!-- Ambient Aurora -->
+  <div
+    class="
+      pointer-events-none
+      absolute
+      inset-0
+      -z-10
+      bg-[radial-gradient(circle_at_15%_15%,rgb(102_201_255/0.10),transparent_30%),radial-gradient(circle_at_80%_5%,rgb(162_138_229/0.09),transparent_28%)]
+    "
+    aria-hidden="true"
+  ></div>
+
+
+  <div class="container-site">
+
+    <div
+      class="
+        grid
+        gap-8
+        lg:grid-cols-[1fr_0.7fr]
+        lg:items-end
+      "
+    >
+
+      <div>
+
+        <p class="eyebrow text-aurora-violet">
+          Aktivitas Al-Fath
+        </p>
+
+        <h1
+          class="
+            mt-4
+            max-w-3xl
+            text-4xl
+            font-bold
+            leading-[1.05]
+            tracking-[-0.045em]
+            sm:text-5xl
+            lg:text-6xl
+          "
+        >
+          Ruang untuk belajar,
+          <span class="aurora-text">
+            bertumbuh, dan berbagi.
+          </span>
+        </h1>
+
+      </div>
+
+
+      <div class="lg:pb-1">
+
+        <p
+          class="
+            max-w-lg
+            text-base
+            leading-[1.8]
+            text-muted
+            lg:ml-auto
+          "
+        >
+          Beragam program Masjid Al-Fath dihadirkan
+          untuk menemani jamaah mendekat kepada
+          Al-Qur'an, menuntut ilmu, serta menebarkan
+          manfaat bersama.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<section class="py-16 lg:py-20">
+
+  <div class="container-site">
+
+    <div class="mx-auto max-w-5xl">
+
+    {{ $pages := .Pages.ByParam "order" }}
+
+
+    <!-- DIRECTORY HEADER -->
+
+    <div
+      class="
+        mb-6
+        flex
+        items-center
+        justify-between
+        gap-6
+      "
+    >
+
+      <p
+        class="
+          text-xs
+          font-bold
+          uppercase
+          tracking-[0.16em]
+          text-muted
+        "
+      >
+        Program Aktif
+      </p>
+
+      <p class="text-sm text-muted">
+        {{ len $pages }} program
+      </p>
+
+    </div>
+
+
+
+    <!-- PROGRAM CARDS -->
+
+    <div class="space-y-6">
+
+      {{ range $index, $page := $pages }}
+
+        {{ $accent := "text-aurora-cyan" }}
+        {{ $line := "bg-aurora-cyan" }}
+        {{ $border := "hover:border-aurora-cyan/30" }}
+
+        {{ if eq $page.Params.category "Layanan Jamaah" }}
+
+          {{ $accent = "text-aurora-violet" }}
+          {{ $line = "bg-aurora-violet" }}
+          {{ $border = "hover:border-aurora-violet/30" }}
+
+        {{ else if eq $page.Params.category "Sosial & Sedekah" }}
+
+          {{ $accent = "text-aurora-coral" }}
+          {{ $line = "bg-aurora-coral" }}
+          {{ $border = "hover:border-aurora-coral/30" }}
+
+        {{ end }}
+
+
+        <article
+          class="
+            group
+            relative
+            overflow-hidden
+            rounded-[28px]
+            border border-white/[0.08]
+            bg-card
+            transition
+            duration-300
+            {{ $border }}
+          "
+        >
+
+          <a
+            href="{{ $page.RelPermalink }}"
+            class="
+              grid
+              min-h-[320px]
+              lg:grid-cols-[0.95fr_1.05fr]
+            "
+          >
+
+
+            <!-- IMAGE -->
+
+            <div
+              class="
+                relative
+                min-h-[240px]
+                overflow-hidden
+                lg:min-h-[380px]
+              "
+            >
+
+              {{ with $page.Params.thumbnail }}
+
+                <img
+                  src="{{ . }}"
+                  srcset="
+                    {{ replace . "-1280.webp" "-640.webp" }} 640w,
+                    {{ replace . "-1280.webp" "-960.webp" }} 960w,
+                    {{ . }} 1280w
+                  "
+                  sizes="
+                    (min-width: 1024px) 48vw,
+                    100vw
+                  "
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="
+                    absolute
+                    inset-0
+                    h-full
+                    w-full
+                    object-cover
+                    transition
+                    duration-700
+                    ease-out
+                    group-hover:scale-[1.025]
+                  "
+                >
+
+                <div
+                  class="
+                    absolute
+                    inset-0
+                    bg-gradient-to-t
+                    from-black/50
+                    via-black/5
+                    to-transparent
+                    lg:bg-gradient-to-r
+                    lg:from-transparent
+                    lg:via-transparent
+                    lg:to-card/70
+                  "
+                  aria-hidden="true"
+                ></div>
+
+              {{ else }}
+
+                <div
+                  class="
+                    absolute
+                    inset-0
+                    bg-[radial-gradient(circle_at_20%_15%,rgb(102_201_255/0.20),transparent_32%),radial-gradient(circle_at_75%_75%,rgb(162_138_229/0.16),transparent_34%),linear-gradient(135deg,#162331,#111620)]
+                  "
+                  aria-hidden="true"
+                ></div>
+
+              {{ end }}
+
+
+              <!-- NUMBER -->
+
+              <div
+                class="
+                  absolute
+                  left-6
+                  top-6
+                  flex
+                  size-11
+                  items-center
+                  justify-center
+                  rounded-full
+                  border border-white/15
+                  bg-black/25
+                  text-xs
+                  font-bold
+                  tracking-[0.08em]
+                  text-white
+                  backdrop-blur-md
+                "
+              >
+                {{ printf "%02d" (add $index 1) }}
+              </div>
+
+            </div>
+
+
+
+            <!-- CONTENT -->
+
+            <div
+              class="
+                relative
+                flex
+                flex-col
+                justify-between
+                p-7
+                sm:p-9
+                lg:p-12
+              "
+            >
+
+              <div>
+
+                <div class="flex items-center gap-3">
+
+                  <span
+                    class="
+                      h-px
+                      w-7
+                      {{ $line }}
+                    "
+                    aria-hidden="true"
+                  ></span>
+
+                  <p
+                    class="
+                      text-xs
+                      font-bold
+                      uppercase
+                      tracking-[0.14em]
+                      {{ $accent }}
+                    "
+                  >
+                    {{ $page.Params.category }}
+                  </p>
+
+                </div>
+
+
+                <h2
+                  class="
+                    mt-6
+                    max-w-xl
+                    text-3xl
+                    font-bold
+                    leading-[1.12]
+                    tracking-[-0.035em]
+                    sm:text-4xl
+                  "
+                >
+                  {{ $page.Title }}
+                </h2>
+
+
+                {{ with $page.Params.summary }}
+
+                  <p
+                    class="
+                      mt-5
+                      max-w-lg
+                      text-base
+                      leading-[1.75]
+                      text-muted
+                    "
+                  >
+                    {{ . }}
+                  </p>
+
+                {{ end }}
+
+              </div>
+
+
+
+              <div
+                class="
+                  mt-10
+                  flex
+                  items-center
+                  justify-between
+                  gap-6
+                "
+              >
+
+                <span
+                  class="
+                    text-[0.9375rem]
+                    font-semibold
+                    tracking-[-0.01em]
+                    {{ $accent }}
+                  "
+                >
+                  Lihat Program
+                </span>
+
+
+                <span
+                  class="
+                    flex
+                    size-11
+                    items-center
+                    justify-center
+                    rounded-full
+                    border border-white/15
+                    bg-white/[0.025]
+                    text-lg
+                    text-muted
+                    transition
+                    duration-300
+                    group-hover:translate-x-1
+                    group-hover:border-white/30
+                    group-hover:bg-white/[0.05]
+                    group-hover:text-white
+                  "
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+        </article>
+
+      {{ end }}
+
+    </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{{ end }}

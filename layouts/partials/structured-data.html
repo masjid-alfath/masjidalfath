@@ -1,0 +1,129 @@
+{{- /*
+  ============================================================
+  STRUCTURED DATA — Masjid Al-Fath
+  ============================================================
+*/ -}}
+
+{{- $siteURL := site.BaseURL -}}
+{{- $siteName := site.Title -}}
+{{- $siteDescription := site.Params.description -}}
+
+
+{{- /* ======================================================
+     HOMEPAGE
+====================================================== */ -}}
+
+{{- if .IsHome }}
+
+  {{- $website := dict
+    "@context" "https://schema.org"
+    "@type" "WebSite"
+    "@id" (printf "%s#website" $siteURL)
+    "url" $siteURL
+    "name" $siteName
+    "description" $siteDescription
+    "inLanguage" "id-ID"
+  -}}
+
+  <script type="application/ld+json">
+    {{ $website | jsonify | safeJS }}
+  </script>
+
+
+  {{- $organization := dict
+    "@context" "https://schema.org"
+    "@type" "Organization"
+    "@id" (printf "%s#organization" $siteURL)
+    "name" $siteName
+    "url" $siteURL
+    "description" $siteDescription
+  -}}
+
+  <script type="application/ld+json">
+    {{ $organization | jsonify | safeJS }}
+  </script>
+
+{{- end }}
+
+
+{{- /* ======================================================
+     ARTICLE
+====================================================== */ -}}
+
+{{- if and .IsPage (eq .Section "artikel") }}
+
+  {{- $description := site.Params.description -}}
+
+  {{- with .Params.description }}
+    {{- $description = . }}
+  {{- else }}
+    {{- with .Params.excerpt }}
+      {{- $description = . }}
+    {{- else }}
+      {{- with .Summary }}
+        {{- $description = . | plainify | htmlUnescape | truncate 160 }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+
+  {{- $description = $description | plainify | htmlUnescape | strings.TrimSpace }}
+  {{- $description = replaceRE `\s+` " " $description }}
+
+
+  {{- $article := dict
+    "@context" "https://schema.org"
+    "@type" "Article"
+    "@id" (printf "%s#article" .Permalink)
+    "headline" .Title
+    "description" $description
+    "url" .Permalink
+    "mainEntityOfPage" .Permalink
+    "inLanguage" "id-ID"
+    "publisher" (dict
+      "@type" "Organization"
+      "@id" (printf "%s#organization" $siteURL)
+      "name" $siteName
+      "url" $siteURL
+    )
+  -}}
+
+
+  {{- with .Date }}
+    {{- $article = merge $article
+      (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00"))
+    }}
+  {{- end }}
+
+
+  {{- with .Lastmod }}
+    {{- $article = merge $article
+      (dict "dateModified" (.Format "2006-01-02T15:04:05Z07:00"))
+    }}
+  {{- end }}
+
+
+  {{- with .Params.author }}
+    {{- $article = merge $article
+      (dict
+        "author"
+        (dict
+          "@type" "Organization"
+          "name" .
+        )
+      )
+    }}
+  {{- end }}
+
+
+  {{- with .Params.thumbnail }}
+    {{- $article = merge $article
+      (dict "image" (. | absURL))
+    }}
+  {{- end }}
+
+
+  <script type="application/ld+json">
+    {{ $article | jsonify | safeJS }}
+  </script>
+
+{{- end }}

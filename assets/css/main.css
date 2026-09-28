@@ -3,6 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+
   /* Typography */
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
@@ -79,14 +80,14 @@
 
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-xl
-           bg-indigo px-5 py-3.5 font-semibold text-white
+           bg-indigo px-5 py-3 font-semibold text-white
            transition duration-200
            hover:bg-indigo-hover;
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center rounded-xl
-           border border-white/15 px-5 py-3.5 font-semibold
+           border border-white/15 px-5 py-3 font-semibold
            transition duration-200
            hover:bg-white/5;
   }
@@ -103,17 +104,6 @@
 
   .eyebrow {
     @apply text-sm font-bold uppercase tracking-[0.16em];
-  }
-
-
-  /* Navigation */
-
-  .nav-link {
-    @apply text-sm text-muted transition-colors duration-200;
-  }
-
-  .nav-link:hover {
-    @apply text-white;
   }
 
 
@@ -387,6 +377,22 @@ html:not(.dark) .text-aurora-coral {
   }
 
 
+  /* ---------- Mobile overflow safety ---------- */
+
+  .article-content {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .article-content p,
+  .article-content li,
+  .article-content blockquote,
+  .article-content figure {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+
   /* ---------- Strong / emphasis ---------- */
 
   .article-content strong {
@@ -404,6 +410,9 @@ html:not(.dark) .text-aurora-coral {
   .article-content a {
     color: var(--color-aurora-cyan);
     font-weight: 600;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
 
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
@@ -676,3 +685,919 @@ html:not(.dark) .text-aurora-coral {
   font-display: swap;
 }
 
+
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+/*
+  Keyboard focus
+  Hanya tampil ketika navigasi menggunakan keyboard,
+  sehingga tidak mengganggu tampilan saat klik mouse/touch.
+*/
+
+@layer base {
+
+  :where(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+    outline: 2px solid var(--color-aurora-cyan);
+    outline-offset: 3px;
+  }
+
+}
+
+
+/*
+  Respect operating-system reduced motion preference.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+}
+
+
+/* ==========================================================
+   GLOBAL POLISH V1
+   Navigation / interaction / brand consistency
+   ========================================================== */
+
+@layer components {
+
+  /* ----------------------------------------------------------
+     Desktop navigation
+     ---------------------------------------------------------- */
+
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 0.45rem;
+    color: var(--color-muted);
+    transition:
+      color 180ms ease,
+      opacity 180ms ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      var(--color-aurora-cyan),
+      var(--color-aurora-violet)
+    );
+    opacity: 0;
+    transform: translateX(-50%);
+    transition:
+      width 180ms ease,
+      opacity 180ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-foreground);
+  }
+
+  /* Underline is reserved for the active page */
+  .nav-link:hover::after {
+    width: 0;
+    opacity: 0;
+  }
+
+  .nav-link.is-active {
+    color: var(--color-foreground);
+    font-weight: 600;
+  }
+
+  .nav-link.is-active::after,
+  .nav-link.is-active:hover::after {
+    width: 100%;
+    opacity: 1;
+  }
+
+
+  /* ----------------------------------------------------------
+     ZISWAF navbar CTA
+     ---------------------------------------------------------- */
+
+  .nav-ziswaf {
+    position: relative;
+  }
+
+  .nav-ziswaf.is-active {
+    background-color: var(--color-indigo-hover);
+    box-shadow:
+      0 0 0 1px rgb(102 201 255 / 0.16),
+      0 8px 28px rgb(52 54 168 / 0.22);
+  }
+
+
+  /* ----------------------------------------------------------
+     Mobile navigation
+     ---------------------------------------------------------- */
+
+  .mobile-nav-link {
+    position: relative;
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.75rem;
+    padding: 0.625rem 0.75rem;
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    transition:
+      color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .mobile-nav-link:hover {
+    background: rgb(255 255 255 / 0.05);
+    color: var(--color-foreground);
+  }
+
+  .mobile-nav-link.is-active {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(102 201 255 / 0.08),
+        rgb(162 138 229 / 0.06)
+      );
+    color: var(--color-foreground);
+    font-weight: 600;
+  }
+
+  .mobile-nav-link.is-active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 2px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--color-aurora-cyan);
+    transform: translateY(-50%);
+  }
+
+  .mobile-nav-dot {
+    width: 5px;
+    height: 5px;
+    flex: none;
+    border-radius: 999px;
+    background: var(--color-aurora-cyan);
+    box-shadow: 0 0 12px rgb(102 201 255 / 0.5);
+  }
+
+  .mobile-ziswaf {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--color-indigo);
+    padding: 0.75rem 1rem;
+    color: white;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    transition:
+      background-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .mobile-ziswaf:hover {
+    background: var(--color-indigo-hover);
+  }
+
+  .mobile-ziswaf.is-active {
+    background: var(--color-indigo-hover);
+    box-shadow:
+      0 0 0 1px rgb(102 201 255 / 0.18),
+      0 8px 28px rgb(52 54 168 / 0.2);
+  }
+
+
+  /* ----------------------------------------------------------
+     Global interactive refinement
+     ---------------------------------------------------------- */
+
+  .btn-primary {
+    transition:
+      background-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 8px 24px rgb(52 54 168 / 0.22);
+  }
+
+  .btn-primary:active,
+  .mobile-ziswaf:active {
+    transform: translateY(1px);
+  }
+
+  .btn-secondary {
+    transition:
+      color 180ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgb(255 255 255 / 0.22);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(1px);
+  }
+}
+
+
+/* ------------------------------------------------------------
+   Light-mode interaction normalization
+   ------------------------------------------------------------ */
+
+html:not(.dark) .btn-secondary:hover {
+  border-color: rgb(17 24 39 / 0.18);
+}
+
+
+/* ------------------------------------------------------------
+   Pointer-only hover lift
+   Avoid unnecessary movement on touch devices
+   ------------------------------------------------------------ */
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover,
+  .mobile-ziswaf:hover {
+    transform: translateY(-1px);
+  }
+}
+
+
+/* Light navbar readability */
+html:not(.dark) .nav-link {
+  color: #667085;
+}
+
+html:not(.dark) .nav-link:hover {
+  color: #1f2937;
+}
+
+html:not(.dark) .nav-link.is-active {
+  color: #111827;
+}
+
+/* Navbar typography refinement */
+@media (min-width: 768px) {
+  .nav-link {
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 500;
+  }
+
+  .nav-link.is-active {
+    font-weight: 600;
+  }
+
+  .nav-ziswaf {
+    font-size: 0.9375rem; /* 15px */
+  }
+}
+
+/* ==========================================================
+   FOOTER TYPOGRAPHY POLISH
+   Balanced with desktop navigation + Minor Third hierarchy
+   ========================================================== */
+
+@layer components {
+
+  /* Section titles: Jelajahi / ZISWAF / Lokasi */
+  footer h2,
+  footer h3 {
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* Footer navigation */
+  footer nav a {
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.5;
+    transition:
+      color 180ms ease,
+      opacity 180ms ease;
+  }
+
+  footer nav a:hover {
+    color: var(--color-foreground);
+  }
+
+  /* Supporting copy: brand description + address */
+  footer p {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.7;
+  }
+
+  /* Legal / bottom bar remains intentionally secondary */
+  footer .footer-meta {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1.5;
+  }
+}
+
+
+/* Light footer readability */
+html:not(.dark) footer nav a,
+html:not(.dark) footer p {
+  color: #667085;
+}
+
+html:not(.dark) footer nav a:hover {
+  color: #111827;
+}
+
+
+/* Mobile: larger type, tighter rhythm */
+/* ==========================================================
+   GLOBAL LINK INTERACTION
+   Underline is reserved for active navigation only
+   ========================================================== */
+
+/* Footer links: no decorative underline */
+footer a:not(.btn-primary):not(.btn-secondary) {
+  text-decoration: none;
+}
+
+footer a:not(.btn-primary):not(.btn-secondary):hover {
+  text-decoration: none;
+  color: var(--color-foreground);
+}
+
+/* Light mode */
+html:not(.dark) footer a:not(.btn-primary):not(.btn-secondary):hover {
+  color: #111827;
+}
+
+/* ==========================================================
+   FOOTER UTILITIES
+   ========================================================== */
+
+.footer-contact-card {
+  display: flex;
+  width: 100%;
+  max-width: 22rem;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+
+  border: 1px solid rgb(255 255 255 / 0.11);
+  border-radius: 1rem;
+
+  background: rgb(255 255 255 / 0.035);
+
+  color: var(--color-foreground);
+  text-decoration: none;
+
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.footer-contact-card:hover {
+  border-color: rgb(102 201 255 / 0.28);
+  background: rgb(102 201 255 / 0.055);
+  color: var(--color-foreground);
+}
+
+.footer-contact-card strong {
+  display: block;
+  font-size: var(--text-sm);
+  line-height: 1.3;
+}
+
+.footer-contact-number {
+  display: block;
+  margin-top: 0.25rem;
+
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+}
+
+.footer-contact-arrow {
+  flex: none;
+
+  color: var(--color-foreground);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.footer-map-link {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+
+  margin-top: 1rem;
+  padding: 0.5rem 0.75rem;
+
+  border-radius: 0.65rem;
+
+  background: rgb(255 255 255 / 0.08);
+
+  color: var(--color-aurora-cyan);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.footer-map-link:hover {
+  background: rgb(255 255 255 / 0.12);
+  color: var(--color-foreground);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-contact-card:hover,
+  .footer-map-link:hover {
+    transform: translateY(-1px);
+  }
+}
+
+html:not(.dark) .footer-contact-card {
+  border-color: rgb(17 24 39 / 0.10);
+  background: rgb(17 24 39 / 0.025);
+}
+
+html:not(.dark) .footer-contact-card:hover {
+  border-color: rgb(22 143 199 / 0.24);
+  background: rgb(22 143 199 / 0.05);
+}
+
+html:not(.dark) .footer-map-link {
+  background: rgb(17 24 39 / 0.06);
+  color: #168fc7;
+}
+
+html:not(.dark) .footer-map-link:hover {
+  background: rgb(17 24 39 / 0.09);
+  color: #111827;
+}
+
+
+/* ==========================================================
+   TYPOGRAPHY SYSTEM
+   Masjid Al-Fath — Midnight Aurora
+   ========================================================== */
+
+@layer base {
+  body {
+    line-height: 1.45;
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: 1.08;
+  }
+
+  h4,
+  h5,
+  h6 {
+    line-height: 1.18;
+  }
+
+  p {
+    line-height: 1.48;
+  }
+}
+
+
+/* ==========================================================
+   CONTENT CTA
+   Notion [CTA] → Hugo
+   Visual mengikuti btn-primary
+   ========================================================== */
+
+.article-content .content-cta {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 0.35rem;
+  margin-bottom: 0.75rem;
+
+  padding: 0.75rem 1.1rem;
+
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.2;
+
+  text-decoration: none;
+}
+
+.article-content .content-cta:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.article-content .content-cta span {
+  color: inherit;
+  line-height: inherit;
+}
+
+
+/* ==========================================================
+   CONTENT COPY
+   Notion [COPY:value] → clipboard button
+   ========================================================== */
+
+.article-content .content-copy {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 0.35rem;
+  margin-bottom: 0.75rem;
+
+  padding: 0.75rem 1.1rem;
+
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.2;
+
+  cursor: pointer;
+}
+
+.article-content .content-copy-success {
+  display: none;
+}
+
+.article-content .content-copy-success:not(.hidden) {
+  display: inline;
+}
+
+.article-content .content-copy.is-copied {
+  box-shadow:
+    0 0 0 1px rgb(102 201 255 / 0.20),
+    0 8px 28px rgb(52 54 168 / 0.22);
+}
+
+
+/* ==========================================================
+   LONG-FORM EDITORIAL
+   ========================================================== */
+
+.article-content {
+  line-height: 1.6;
+}
+
+.article-content p {
+  margin-top: 0;
+  margin-bottom: 1.15em;
+  line-height: 1.6;
+}
+
+.article-content li {
+  line-height: 1.55;
+}
+
+.article-content h2 {
+  line-height: 1.15;
+}
+
+.article-content h3 {
+  line-height: 1.18;
+}
+
+
+/* ==========================================================
+   FOOTER TYPOGRAPHY
+   Navigation spacing lives in footer.html, not here.
+   ========================================================== */
+
+footer p,
+footer address {
+  line-height: 1.45;
+}
+
+footer nav a {
+  min-height: 0;
+  padding-block: 0;
+  line-height: 1.4;
+}
+
+
+
+/* ==========================================================
+   MOBILE NAVIGATION — LIGHT MODE
+   Clear hierarchy without changing dark mode
+   ========================================================== */
+
+@media (max-width: 767px) {
+
+  /* Header / expanded menu surface */
+  html:not(.dark) header {
+    background-color: rgb(255 255 255 / 0.96);
+    border-color: rgb(17 24 39 / 0.10);
+  }
+
+  /* Hamburger / close button */
+  html:not(.dark) #mobile-menu-button {
+    color: #1F2937;
+    border-color: rgb(17 24 39 / 0.12);
+    background-color: #F8FAFC;
+  }
+
+  html:not(.dark) #mobile-menu-button:hover {
+    color: #111827;
+    background-color: #F1F5F9;
+    border-color: rgb(17 24 39 / 0.16);
+  }
+
+  /* Divider under navbar */
+  html:not(.dark) #mobile-menu {
+    border-color: rgb(17 24 39 / 0.08);
+  }
+
+  /* Navigation text needs more authority than global muted */
+  html:not(.dark) .mobile-nav-link {
+    color: #475467;
+  }
+
+  html:not(.dark) .mobile-nav-link:hover {
+    color: #111827;
+    background-color: #F8FAFC;
+  }
+
+  html:not(.dark) .mobile-nav-link.is-active {
+    color: #111827;
+    background:
+      linear-gradient(
+        90deg,
+        rgb(22 143 199 / 0.09),
+        rgb(114 89 200 / 0.055)
+      );
+  }
+
+  /* Appearance row */
+  html:not(.dark) #mobile-menu .theme-toggle {
+    color: #475467;
+    border-color: rgb(17 24 39 / 0.10);
+    background-color: #F8FAFC;
+  }
+
+  html:not(.dark) #mobile-menu .theme-toggle:hover {
+    color: #111827;
+    border-color: rgb(17 24 39 / 0.14);
+    background-color: #F1F5F9;
+  }
+
+  html:not(.dark) #mobile-menu .theme-label {
+    color: #475467;
+  }
+}
+
+
+
+/* ==========================================================
+   PROGRAM DIRECTORY FILTER
+   ========================================================== */
+
+.program-filter-scroll {
+  scrollbar-width: none;
+}
+
+.program-filter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.program-filter {
+  display: inline-flex;
+  min-height: 40px;
+  flex: none;
+  align-items: center;
+  gap: 0.55rem;
+
+  border: 1px solid rgb(255 255 255 / 0.09);
+  border-radius: 999px;
+
+  background: rgb(255 255 255 / 0.025);
+
+  padding: 0.5rem 0.8rem;
+
+  color: var(--color-muted);
+
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.program-filter:hover {
+  border-color: rgb(255 255 255 / 0.16);
+  background: rgb(255 255 255 / 0.045);
+  color: var(--color-foreground);
+}
+
+.program-filter.is-active {
+  border-color: rgb(102 201 255 / 0.20);
+  background:
+    linear-gradient(
+      135deg,
+      rgb(102 201 255 / 0.09),
+      rgb(162 138 229 / 0.07)
+    );
+  color: var(--color-foreground);
+
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.025);
+}
+
+.program-filter[data-accent="cyan"].is-active {
+  border-color: rgb(102 201 255 / 0.28);
+}
+
+.program-filter[data-accent="violet"].is-active {
+  border-color: rgb(162 138 229 / 0.30);
+}
+
+.program-filter[data-accent="coral"].is-active {
+  border-color: rgb(255 112 100 / 0.28);
+}
+
+.program-filter-count {
+  display: inline-flex;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+
+  background: rgb(255 255 255 / 0.07);
+
+  padding-inline: 0.35rem;
+
+  color: var(--color-muted);
+
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+
+.program-filter.is-active .program-filter-count {
+  background: rgb(255 255 255 / 0.10);
+  color: var(--color-foreground);
+}
+
+.program-category[hidden] {
+  display: none !important;
+}
+
+
+/* Light mode */
+
+html:not(.dark) .program-filter {
+  border-color: rgb(17 24 39 / 0.09);
+  background: rgb(17 24 39 / 0.025);
+  color: #667085;
+}
+
+html:not(.dark) .program-filter:hover {
+  border-color: rgb(17 24 39 / 0.15);
+  background: rgb(17 24 39 / 0.045);
+  color: #111827;
+}
+
+html:not(.dark) .program-filter.is-active {
+  border-color: rgb(22 143 199 / 0.22);
+  background:
+    linear-gradient(
+      135deg,
+      rgb(22 143 199 / 0.08),
+      rgb(114 89 200 / 0.055)
+    );
+  color: #111827;
+}
+
+html:not(.dark) .program-filter-count {
+  background: rgb(17 24 39 / 0.055);
+}
+
+html:not(.dark) .program-filter.is-active .program-filter-count {
+  color: #111827;
+}
+
+
+/* ==========================================================
+   PROGRAM CATEGORY FILTER
+   ========================================================== */
+
+.program-category-filter {
+  position: relative;
+}
+
+.program-category-filter:hover {
+  border-color: rgb(255 255 255 / 0.16);
+  background: rgb(255 255 255 / 0.05);
+  color: var(--color-foreground);
+}
+
+.program-category-filter.is-active {
+  border-color: rgb(255 255 255 / 0.22);
+  background: rgb(255 255 255 / 0.065);
+  color: var(--color-foreground);
+}
+
+.program-category-filter.is-active::after {
+  content: "";
+
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: -1px;
+
+  height: 2px;
+  border-radius: 999px;
+
+  background: currentColor;
+}
+
+.program-category-filter[data-program-filter="kajian-pendidikan"].is-active {
+  color: var(--color-aurora-cyan);
+}
+
+.program-category-filter[data-program-filter="layanan-jamaah"].is-active {
+  color: var(--color-aurora-violet);
+}
+
+.program-category-filter[data-program-filter="sosial-sedekah"].is-active {
+  color: var(--color-aurora-coral);
+}
+
+
+/* Light mode */
+
+html:not(.dark) .program-category-filter {
+  border-color: rgb(17 24 39 / 0.10);
+  background: rgb(17 24 39 / 0.025);
+}
+
+html:not(.dark) .program-category-filter:hover {
+  border-color: rgb(17 24 39 / 0.16);
+  background: rgb(17 24 39 / 0.045);
+}
+
+html:not(.dark) .program-category-filter.is-active {
+  border-color: rgb(17 24 39 / 0.18);
+  background: rgb(17 24 39 / 0.055);
+}

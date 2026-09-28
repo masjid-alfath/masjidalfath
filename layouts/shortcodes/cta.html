@@ -1,0 +1,16 @@
+{{- $href := .Get "href" -}}
+{{- $external := or
+  (hasPrefix $href "http://")
+  (hasPrefix $href "https://")
+-}}
+
+<a
+  href="{{ $href | safeURL }}"
+  class="btn-primary content-cta"
+  {{- if $external }}
+  target="_blank"
+  rel="noopener noreferrer"
+  {{- end }}
+>
+  <span>{{ .Inner | markdownify }}</span>
+</a>

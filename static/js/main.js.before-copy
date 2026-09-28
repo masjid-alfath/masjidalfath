@@ -1,0 +1,112 @@
+const menuButton = document.getElementById("mobile-menu-button");
+const mobileMenu = document.getElementById("mobile-menu");
+const menuIcon = document.getElementById("menu-icon");
+const closeIcon = document.getElementById("close-icon");
+
+if (menuButton && mobileMenu) {
+  const mobileLinks = mobileMenu.querySelectorAll("a[href]");
+
+  function setMenuState(open, { returnFocus = false } = {}) {
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute(
+      "aria-label",
+      open ? "Tutup menu" : "Buka menu"
+    );
+
+    mobileMenu.setAttribute("aria-hidden", String(!open));
+    mobileMenu.classList.toggle("hidden", !open);
+
+    menuIcon?.classList.toggle("hidden", open);
+    closeIcon?.classList.toggle("hidden", !open);
+
+    if (returnFocus) {
+      menuButton.focus();
+    }
+  }
+
+  function isMenuOpen() {
+    return menuButton.getAttribute("aria-expanded") === "true";
+  }
+
+  menuButton.addEventListener("click", () => {
+    const nextState = !isMenuOpen();
+
+    setMenuState(nextState);
+
+    if (nextState) {
+      const activeLink =
+        mobileMenu.querySelector('[aria-current="page"]') ||
+        mobileMenu.querySelector("a[href]");
+
+      activeLink?.focus();
+    }
+  });
+
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      setMenuState(false);
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isMenuOpen()) {
+      setMenuState(false, { returnFocus: true });
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768 && isMenuOpen()) {
+      setMenuState(false);
+    }
+  });
+}
+
+
+// ========================================
+// THEME
+// ========================================
+
+const themeToggles = document.querySelectorAll(".theme-toggle");
+
+function updateThemeUI() {
+  const isDark = document.documentElement.classList.contains("dark");
+
+  document.querySelectorAll(".theme-icon-moon").forEach((icon) => {
+    icon.classList.toggle("hidden", !isDark);
+  });
+
+  document.querySelectorAll(".theme-icon-sun").forEach((icon) => {
+    icon.classList.toggle("hidden", isDark);
+  });
+
+  document.querySelectorAll(".theme-label").forEach((label) => {
+    label.textContent = isDark ? "Gelap" : "Terang";
+  });
+
+  themeToggles.forEach((button) => {
+    button.setAttribute(
+      "aria-label",
+      isDark ? "Gunakan tema terang" : "Gunakan tema gelap"
+    );
+  });
+}
+
+themeToggles.forEach((button) => {
+  button.addEventListener("click", () => {
+    const isDark =
+      document.documentElement.classList.contains("dark");
+
+    document.documentElement.classList.toggle("dark", !isDark);
+
+    try {
+      localStorage.setItem(
+        "alfath-theme",
+        isDark ? "light" : "dark"
+      );
+    } catch (_) {}
+
+    updateThemeUI();
+  });
+});
+
+updateThemeUI();

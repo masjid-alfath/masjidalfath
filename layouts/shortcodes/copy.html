@@ -1,0 +1,19 @@
+{{- $value := .Get "value" -}}
+
+<button
+  type="button"
+  class="btn-primary content-copy"
+  data-copy-value="{{ $value }}"
+  aria-label="{{ .Inner | plainify }}"
+>
+  <span class="content-copy-label">
+    {{- .Inner | markdownify -}}
+  </span>
+
+  <span
+    class="content-copy-success hidden"
+    aria-hidden="true"
+  >
+    ✓ Berhasil Disalin
+  </span>
+</button>

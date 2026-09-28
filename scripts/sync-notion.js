@@ -109,8 +109,55 @@ function richTextToMarkdown(items = []) {
       }
     }
 
+    /*
+     * CMS convention:
+     *
+     * [COPY:6922200007] Salin Nomor Rekening
+     *
+     * COPY tidak membutuhkan hyperlink di Notion.
+     */
+    const copyMatch =
+      text.match(/^\[COPY:([^\]]+)\]\s*(.+)$/i);
+
+    if (copyMatch) {
+
+      const copyValue = copyMatch[1].trim();
+      const label = copyMatch[2].trim();
+
+      const safeValue = copyValue
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;");
+
+      text =
+        `{{< copy value="${safeValue}" >}}${label}{{< /copy >}}`;
+
+      return text;
+    }
+
     if (item.href) {
-      text = `[${text}](${item.href})`;
+
+      /*
+       * [CTA] Saya Mau Daftar →
+       * + hyperlink seluruh teks di Notion
+       */
+      const ctaMatch = text.match(/^\[CTA\]\s*(.+)$/i);
+
+      if (ctaMatch) {
+
+        const label = ctaMatch[1].trim();
+
+        const safeHref = String(item.href)
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;");
+
+        text =
+          `{{< cta href="${safeHref}" >}}${label}{{< /cta >}}`;
+
+      } else {
+
+        text = `[${text}](${item.href})`;
+
+      }
     }
 
     return text;
@@ -119,7 +166,7 @@ function richTextToMarkdown(items = []) {
 }
 
 
-async function getAllChildren(blockId) {
+async function getAllChildren(blockId, client = notion) {
 
   const results = [];
   let cursor;
@@ -127,7 +174,7 @@ async function getAllChildren(blockId) {
   do {
 
     const response =
-      await notion.blocks.children.list({
+      await client.blocks.children.list({
         block_id: blockId,
         start_cursor: cursor,
         page_size: 100,
@@ -299,6 +346,16 @@ async function blockToMarkdown(block) {
       return `[${data.url}](${data.url})`;
 
 
+    case "button":
+
+      console.log(
+        "  🔎 NOTION BUTTON:",
+        JSON.stringify(block, null, 2)
+      );
+
+      return "";
+
+
     default:
 
       console.log(
@@ -310,10 +367,10 @@ async function blockToMarkdown(block) {
 }
 
 
-async function pageBodyToMarkdown(pageId) {
+async function pageBodyToMarkdown(pageId, client = notion) {
 
   const blocks =
-    await getAllChildren(pageId);
+    await getAllChildren(pageId, client);
 
   const output = [];
 
@@ -334,7 +391,7 @@ async function pageBodyToMarkdown(pageId) {
     if (block.has_children) {
 
       const children =
-        await pageBodyToMarkdown(block.id);
+        await pageBodyToMarkdown(block.id, client);
 
       if (children.trim()) {
         output.push(children);
@@ -389,6 +446,116 @@ async function getPublishedArticles() {
   } while (cursor);
 
   return articles;
+}
+
+
+/* =========================================================
+   CLEANUP GENERATED ARTICLES
+   ========================================================= */
+
+async function cleanupGeneratedArticles(publishedPages = []) {
+
+  const publishedIds =
+    new Set(
+      publishedPages.map(page => page.id)
+    );
+
+  const files =
+    await fs.readdir(
+      OUTPUT_DIR,
+      { withFileTypes: true }
+    );
+
+  let removed = 0;
+
+  for (const file of files) {
+
+    if (
+      !file.isFile() ||
+      !file.name.endsWith(".md") ||
+      file.name === "_index.md"
+    ) {
+      continue;
+    }
+
+
+    const filePath =
+      path.join(
+        OUTPUT_DIR,
+        file.name
+      );
+
+
+    const content =
+      await fs.readFile(
+        filePath,
+        "utf8"
+      );
+
+
+    /*
+     * Hanya file yang memang dibuat oleh
+     * Notion sync yang boleh dibersihkan.
+     * Artikel manual tetap aman.
+     */
+    if (
+      !content.includes(
+        "generated_by_notion: true"
+      )
+    ) {
+      continue;
+    }
+
+
+    const notionIdMatch =
+      content.match(
+        /^notion_id:\s*"([^"]+)"/m
+      );
+
+
+    const notionId =
+      notionIdMatch?.[1] || "";
+
+
+    /*
+     * File generated lama tanpa notion_id
+     * tidak disentuh otomatis demi keamanan.
+     */
+    if (!notionId) {
+
+      console.warn(
+        `  ⚠ Skip cleanup ${file.name}: notion_id tidak ditemukan`
+      );
+
+      continue;
+    }
+
+
+    if (!publishedIds.has(notionId)) {
+
+      await fs.unlink(filePath);
+
+      removed++;
+
+      console.log(
+        `  🗑 Hapus artikel non-published: ${file.name}`
+      );
+    }
+  }
+
+
+  if (removed === 0) {
+
+    console.log(
+      "  ✓ Tidak ada artikel lama yang perlu dibersihkan"
+    );
+
+  } else {
+
+    console.log(
+      `  ✓ ${removed} artikel generated lama dibersihkan`
+    );
+  }
 }
 
 
@@ -675,6 +842,20 @@ function agendaPageToObject(page) {
     props.Program?.select?.name || "";
 
 
+  /*
+   * Relasi langsung ke database Program.
+   *
+   * Kita simpan Notion Page ID Program agar Agenda
+   * tidak bergantung pada kesamaan nama.
+   *
+   * Property select "Program" lama tetap dipakai
+   * sebagai fallback selama masa migrasi.
+   */
+  const programId =
+    props["Program Relation"]
+      ?.relation?.[0]?.id || "";
+
+
   const location =
     plainText(
       props.Lokasi?.rich_text
@@ -702,6 +883,7 @@ function agendaPageToObject(page) {
     theme,
     speaker,
     program,
+    programId,
     location,
     status,
     ...formatted,
@@ -728,6 +910,7 @@ function agendaToYaml(items) {
       `  theme: ${yamlString(item.theme)}`,
       `  speaker: ${yamlString(item.speaker)}`,
       `  program: ${yamlString(item.program)}`,
+      `  program_id: ${yamlString(item.programId)}`,
       `  location: ${yamlString(item.location)}`,
       `  status: ${yamlString(item.status)}`,
       `  notion_id: ${yamlString(item.notionId)}`,
@@ -968,12 +1151,23 @@ function programPageToObject(page) {
   }
 
 
+  const thumbnail =
+    props.Thumbnail?.files?.[0];
+
+  const thumbnailUrl =
+    thumbnail?.type === "external"
+      ? thumbnail.external?.url
+      : thumbnail?.file?.url;
+
+
   return {
+    pageId: page.id,
     name,
     category,
     summary,
     slug,
     order,
+    thumbnailUrl: thumbnailUrl || "",
   };
 }
 
@@ -1118,6 +1312,302 @@ function programCategoriesToYaml(items) {
 }
 
 
+
+function slugifyProgram(value = "") {
+
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+}
+
+
+async function processProgramThumbnail(url, slug) {
+
+  if (!url) {
+    return "";
+  }
+
+
+  const outputDir =
+    path.join(
+      process.cwd(),
+      "static",
+      "images",
+      "program"
+    );
+
+
+  await fs.mkdir(
+    outputDir,
+    { recursive: true }
+  );
+
+
+  console.log(
+    "  ↓ Download thumbnail program"
+  );
+
+
+  const response =
+    await fetch(url);
+
+
+  if (!response.ok) {
+    throw new Error(
+      `Gagal download thumbnail Program: ${response.status}`
+    );
+  }
+
+
+  const buffer =
+    Buffer.from(
+      await response.arrayBuffer()
+    );
+
+
+  const sizes =
+    [640, 960, 1280];
+
+
+  for (const width of sizes) {
+
+    const filename =
+      `${slug}-${width}.webp`;
+
+
+    await sharp(buffer)
+      .resize({
+        width,
+        withoutEnlargement: true,
+      })
+      .webp({
+        quality: 78,
+        effort: 5,
+      })
+      .toFile(
+        path.join(
+          outputDir,
+          filename
+        )
+      );
+
+
+    console.log(
+      `    ✓ ${filename}`
+    );
+
+  }
+
+
+  return `/images/program/${slug}-1280.webp`;
+}
+
+
+function programFrontMatter(program, thumbnail) {
+
+  const lines = [
+    "---",
+    `title: ${yamlString(program.name)}`,
+    `slug: ${yamlString(program.slug)}`,
+    `category: ${yamlString(program.category)}`,
+    `summary: ${yamlString(program.summary)}`,
+    `order: ${program.order}`,
+    `status: "Aktif"`,
+    `generated_by_notion: true`,
+    `notion_id: ${yamlString(program.pageId)}`,
+  ];
+
+
+  if (thumbnail) {
+    lines.push(
+      `thumbnail: ${yamlString(thumbnail)}`
+    );
+  }
+
+
+  lines.push("---", "");
+
+
+  return lines.join("\n");
+}
+
+
+async function syncProgramContent(programs) {
+
+  const contentDir =
+    path.join(
+      process.cwd(),
+      "content",
+      "program"
+    );
+
+
+  await fs.mkdir(
+    contentDir,
+    { recursive: true }
+  );
+
+
+  const indexFile =
+    path.join(
+      contentDir,
+      "_index.md"
+    );
+
+
+  const indexContent = `---
+title: "Program"
+description: "Beragam program Masjid Al-Fath untuk menemani jamaah belajar, beribadah, bertumbuh, dan menebarkan manfaat."
+---
+
+`;
+
+
+  await fs.writeFile(
+    indexFile,
+    indexContent,
+    "utf8"
+  );
+
+
+  /*
+   * Hapus hanya file Program yang sebelumnya
+   * dibuat oleh Notion.
+   * File manual tetap aman.
+   */
+
+  const existing =
+    await fs.readdir(
+      contentDir,
+      {
+        withFileTypes: true,
+      }
+    );
+
+
+  for (const entry of existing) {
+
+    if (
+      !entry.isFile() ||
+      entry.name === "_index.md" ||
+      !entry.name.endsWith(".md")
+    ) {
+      continue;
+    }
+
+
+    const file =
+      path.join(
+        contentDir,
+        entry.name
+      );
+
+
+    const body =
+      await fs.readFile(
+        file,
+        "utf8"
+      );
+
+
+    if (
+      body.includes(
+        "generated_by_notion: true"
+      )
+    ) {
+
+      await fs.unlink(file);
+
+    }
+
+  }
+
+
+  for (const original of programs) {
+
+    const program = {
+      ...original,
+
+      slug:
+        original.slug ||
+        slugifyProgram(
+          original.name
+        ),
+    };
+
+
+    if (!program.slug) {
+      console.warn(
+        `  ! Skip Program tanpa slug: ${program.name}`
+      );
+
+      continue;
+    }
+
+
+    console.log(
+      `\n→ Generate Program: ${program.name}`
+    );
+
+
+    let thumbnail = "";
+
+
+    if (program.thumbnailUrl) {
+
+      thumbnail =
+        await processProgramThumbnail(
+          program.thumbnailUrl,
+          program.slug
+        );
+
+    }
+
+
+    const body =
+      await pageBodyToMarkdown(
+        program.pageId,
+        notionProgram
+      );
+
+
+    const output =
+      programFrontMatter(
+        program,
+        thumbnail
+      ) +
+      (body.trim()
+        ? body.trim() + "\n"
+        : "");
+
+
+    const outputFile =
+      path.join(
+        contentDir,
+        `${program.slug}.md`
+      );
+
+
+    await fs.writeFile(
+      outputFile,
+      output,
+      "utf8"
+    );
+
+
+    console.log(
+      `  ✓ content/program/${program.slug}.md`
+    );
+
+  }
+
+}
+
+
 async function syncProgram() {
 
   if (!process.env.NOTION_PROGRAM_TOKEN) {
@@ -1167,6 +1657,11 @@ async function syncProgram() {
     buildProgramCategories(
       programs
     );
+
+
+  await syncProgramContent(
+    programs
+  );
 
 
   await fs.mkdir(
@@ -1239,6 +1734,14 @@ async function main() {
   console.log(
     `Ditemukan ${pages.length} artikel published.\n`
   );
+
+
+  /*
+   * Jadikan checkbox Notion sebagai source of truth.
+   * File generated yang sudah tidak published
+   * dibersihkan sebelum artikel terbaru ditulis.
+   */
+  await cleanupGeneratedArticles(pages);
 
 
   for (const page of pages) {

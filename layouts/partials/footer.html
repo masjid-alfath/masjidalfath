@@ -10,60 +10,42 @@
 
     <div class="
         grid
-        gap-12
+        grid-cols-2
+        gap-x-8
+        gap-y-12
         py-14
-        md:grid-cols-2
         lg:grid-cols-[1.3fr_0.6fr_0.7fr_1.3fr]
+        lg:gap-x-12
         lg:py-16
       ">
 
       <!-- Brand -->
 
-      <div>
+      <div class="col-span-2 lg:col-span-1">
 
         <a
           href="/"
           class="
             inline-flex
-            items-center
-            gap-3
+            text-sm
+            font-bold
+            tracking-[0.14em]
+            text-foreground
+            transition-colors
+            hover:text-aurora-cyan
           "
-          aria-label="Masjid Al-Fath"
+          aria-label="Masjid Al-Fath — Beranda"
         >
-
-          <div
-            class="
-              flex size-10
-              items-center
-              justify-center
-              rounded-xl
-              bg-indigo
-              text-sm
-              font-bold
-              text-white
-            "
-          >
-            AF
-          </div>
-
-          <span
-            class="
-              font-bold
-              tracking-[-0.02em]
-            "
-          >
-            Masjid Al-Fath
-          </span>
-
+          MASJID AL-FATH
         </a>
 
 
         <p
           class="
-            mt-5
+            mt-4
             max-w-sm
             text-sm
-            leading-6
+            leading-[1.45]
             text-muted
           "
         >
@@ -71,6 +53,29 @@
           Hadir sebagai rumah bagi jamaah untuk beribadah,
           belajar, dan bertumbuh bersama.
         </p>
+
+
+        <a
+          href="https://wa.me/6282122220615"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-contact-card"
+          aria-label="Hubungi WhatsApp Admin Masjid Al-Fath"
+        >
+          <span>
+            <strong>WhatsApp Admin Masjid</strong>
+            <span class="footer-contact-number">
+              +62 821-2222-0615
+            </span>
+          </span>
+
+          <span
+            class="footer-contact-arrow"
+            aria-hidden="true"
+          >
+            ↗
+          </span>
+        </a>
 
       </div>
 
@@ -91,27 +96,51 @@
 
         <nav
           class="
-            mt-5
+            mt-4
             flex
             flex-col
             items-start
-            gap-3
+            gap-2.5
           "
           aria-label="Navigasi footer"
         >
-          <a href="/program/" class="nav-link">
+          <a href="/program/" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
             Program
           </a>
 
-          <a href="/agenda/" class="nav-link">
+          <a href="/agenda/" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
             Agenda
           </a>
 
-          <a href="/artikel/" class="nav-link">
+          <a href="/artikel/" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
             Artikel
           </a>
 
-          <a href="/tentang/" class="nav-link">
+          <a href="/tentang/" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
             Tentang
           </a>
         </nav>
@@ -135,27 +164,51 @@
 
         <nav
           class="
-            mt-5
+            mt-4
             flex
             flex-col
             items-start
-            gap-3
+            gap-2.5
           "
           aria-label="Navigasi ZISWAF"
         >
-          <a href="/ziswaf/#zakat" class="nav-link">
+          <a href="/ziswaf/#zakat" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
             Zakat
           </a>
 
-          <a href="/ziswaf/#infak-sedekah" class="nav-link">
+          <a href="/ziswaf/#infak-sedekah" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
             Infak &amp; Sedekah
           </a>
 
-          <a href="/ziswaf/#wakaf" class="nav-link">
+          <a href="/ziswaf/#wakaf" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
             Wakaf
           </a>
 
-          <a href="/ziswaf/#dana-syubhat" class="nav-link">
+          <a href="/ziswaf/#dana-syubhat" class="
+            text-sm
+            leading-[1.4]
+            text-muted
+            transition-colors
+            hover:text-foreground
+          ">
             Dana Syubhat
           </a>
         </nav>
@@ -165,7 +218,7 @@
 
       <!-- Address -->
 
-      <div>
+      <div class="col-span-2 lg:col-span-1">
 
         <p
           class="
@@ -181,13 +234,24 @@
             mt-5
             not-italic
             text-sm
-            leading-6
+            leading-[1.45]
             text-muted
           ">
-            Komple Bumi Panyileukan Jl. Sehati 9 No.11, Kelurahan Cipadung Kidul,
+            Komplek Bumi Panyileukan Jl. Sehati 9 No.11, Kelurahan Cipadung Kidul,
             Panyileukan, Kota Bandung,
             Jawa Barat 40614
         </address>
+
+        <a
+          href="/agenda/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-map-link"
+          aria-label="Buka lokasi Masjid Al-Fath di Google Maps"
+        >
+          GMAP
+          <span aria-hidden="true">↗</span>
+        </a>
 
       </div>
 

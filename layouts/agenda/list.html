@@ -1,0 +1,698 @@
+{{ define "main" }}
+
+{{/*
+  ============================================================
+  AGENDA — MASJID AL-FATH
+  Source:
+    Notion → sync-notion.js → data/agenda.yaml
+
+  Program relation:
+    agenda.program_id ↔ program.Params.notion_id
+  ============================================================
+*/}}
+
+{{ $allAgenda := hugo.Data.agenda }}
+
+{{ $upcoming := slice }}
+{{ $finished := slice }}
+
+{{ range $allAgenda }}
+  {{ if eq .status "Selesai" }}
+    {{ $finished = $finished | append . }}
+  {{ else }}
+    {{ $upcoming = $upcoming | append . }}
+  {{ end }}
+{{ end }}
+
+
+<!-- ========================================================
+     HERO
+     ======================================================== -->
+
+<section
+  class="relative overflow-hidden border-b border-white/6 bg-base"
+>
+
+  <!-- Aurora -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 overflow-hidden"
+  >
+    <div
+      class="absolute -left-32 top-0 h-[420px] w-[420px] rounded-full bg-aurora-cyan/10 blur-[120px]"
+    ></div>
+
+    <div
+      class="absolute left-1/2 top-[-220px] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-aurora-violet/10 blur-[140px]"
+    ></div>
+
+    <div
+      class="absolute -right-36 top-20 h-[380px] w-[380px] rounded-full bg-aurora-coral/8 blur-[120px]"
+    ></div>
+  </div>
+
+
+  <div class="container-site relative py-16 lg:py-20">
+
+    <div class="max-w-4xl">
+
+      <div
+        class="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-aurora-cyan"
+      >
+        <span class="h-px w-8 bg-aurora-cyan/60"></span>
+        Agenda Al-Fath
+      </div>
+
+
+      <h1
+        class="max-w-4xl text-4xl font-semibold tracking-[-0.035em] text-foreground sm:text-5xl lg:text-6xl"
+      >
+        Temukan waktu untuk
+        <span
+          class="bg-gradient-to-r from-aurora-cyan via-aurora-violet to-aurora-coral bg-clip-text text-transparent"
+        >
+          hadir dan bertumbuh.
+        </span>
+      </h1>
+
+
+      <p
+        class="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg"
+      >
+        Jadwal kajian, majelis ilmu, layanan jamaah,
+        dan berbagai kegiatan Masjid Al-Fath.
+      </p>
+
+
+      <div
+        class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted"
+      >
+        <div class="flex items-center gap-2">
+          <span
+            class="inline-block h-2 w-2 rounded-full bg-aurora-cyan"
+          ></span>
+
+          <span>
+            {{ len $upcoming }} agenda mendatang
+          </span>
+        </div>
+
+        <span class="hidden h-4 w-px bg-white/10 sm:block"></span>
+
+        <span>
+          Bandung · Jawa Barat
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================================
+     UPCOMING AGENDA
+     ======================================================== -->
+
+<section class="bg-base py-14 lg:py-20">
+
+  <div class="container-site">
+
+    <div
+      class="mb-8 flex items-end justify-between gap-6 border-b border-white/8 pb-5"
+    >
+
+      <div>
+
+        <div
+          class="text-xs font-semibold uppercase tracking-[0.2em] text-muted"
+        >
+          Jadwal
+        </div>
+
+        <h2
+          class="mt-2 text-2xl font-semibold tracking-[-0.025em] text-foreground sm:text-3xl"
+        >
+          Agenda mendatang
+        </h2>
+
+      </div>
+
+
+      {{ if gt (len $upcoming) 0 }}
+
+        <div
+          class="hidden text-sm text-muted sm:block"
+        >
+          {{ len $upcoming }}
+          kegiatan
+        </div>
+
+      {{ end }}
+
+    </div>
+
+
+    {{ if gt (len $upcoming) 0 }}
+
+      <div class="space-y-4">
+
+        {{ range $index, $item := $upcoming }}
+
+
+          {{/*
+            Cari Program berdasarkan Notion Relation ID.
+          */}}
+
+          {{ $programPage := false }}
+
+          {{ if $item.program_id }}
+
+            {{ range where site.RegularPages "Section" "program" }}
+
+              {{ if eq .Params.notion_id $item.program_id }}
+
+                {{ $programPage = . }}
+
+              {{ end }}
+
+            {{ end }}
+
+          {{ end }}
+
+
+          {{/*
+            Accent bergantian agar timeline hidup,
+            tetapi tetap dalam DNA Midnight Aurora.
+          */}}
+
+          {{ $accent := "cyan" }}
+
+          {{ if eq (mod $index 3) 1 }}
+            {{ $accent = "violet" }}
+          {{ else if eq (mod $index 3) 2 }}
+            {{ $accent = "coral" }}
+          {{ end }}
+
+
+          <article
+            class="group relative overflow-hidden rounded-2xl border border-white/8 bg-card transition duration-300 hover:border-white/14"
+          >
+
+            <!-- subtle hover light -->
+            <div
+              aria-hidden="true"
+              class="
+                pointer-events-none absolute inset-0 opacity-0
+                transition duration-500 group-hover:opacity-100
+
+                {{ if eq $accent "cyan" }}
+                  bg-gradient-to-r from-aurora-cyan/5 via-transparent to-transparent
+                {{ else if eq $accent "violet" }}
+                  bg-gradient-to-r from-violet/5 via-transparent to-transparent
+                {{ else }}
+                  bg-gradient-to-r from-coral/5 via-transparent to-transparent
+                {{ end }}
+              "
+            ></div>
+
+
+            <div
+              class="relative grid md:grid-cols-[130px_1fr]"
+            >
+
+              <!-- DATE -->
+
+              <div
+                class="flex items-center gap-4 border-b border-white/8 px-5 py-5 md:flex-col md:items-start md:justify-between md:border-b-0 md:border-r md:px-7 md:py-7"
+              >
+
+                <div>
+
+                  <div
+                    class="
+                      text-4xl font-semibold leading-none tracking-[-0.04em]
+
+                      {{ if eq $accent "cyan" }}
+                        text-aurora-cyan
+                      {{ else if eq $accent "violet" }}
+                        text-aurora-violet
+                      {{ else }}
+                        text-aurora-coral
+                      {{ end }}
+                    "
+                  >
+                    {{ $item.day }}
+                  </div>
+
+                  <div
+                    class="mt-1 text-xs font-semibold tracking-[0.18em] text-muted"
+                  >
+                    {{ $item.month }}
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="ml-auto text-right md:ml-0 md:text-left"
+                >
+
+                  <div
+                    class="text-sm font-medium text-foreground"
+                  >
+                    {{ $item.weekday }}
+                  </div>
+
+                  <div
+                    class="mt-1 text-xs text-muted"
+                  >
+                    {{ $item.time }} WIB
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- CONTENT -->
+
+              <div
+                class="relative px-5 py-6 sm:px-7 md:px-8 md:py-7 lg:px-10"
+              >
+
+                <div
+                  class="flex flex-wrap items-center gap-3"
+                >
+
+                  {{ if $programPage }}
+
+                    <span
+                      class="
+                        text-[0.68rem] font-semibold uppercase tracking-[0.16em]
+
+                        {{ if eq $accent "cyan" }}
+                          text-aurora-cyan
+                        {{ else if eq $accent "violet" }}
+                          text-aurora-violet
+                        {{ else }}
+                          text-aurora-coral
+                        {{ end }}
+                      "
+                    >
+                      {{ $programPage.Params.category }}
+                    </span>
+
+                  {{ else }}
+
+                    <span
+                      class="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted"
+                    >
+                      Agenda Al-Fath
+                    </span>
+
+                  {{ end }}
+
+
+                  <span
+                    class="h-1 w-1 rounded-full bg-white/20"
+                  ></span>
+
+
+                  {{ if eq $item.status "Ditunda" }}
+
+                    <span
+                      class="inline-flex items-center gap-1.5 rounded-full border border-aurora-coral/30 bg-aurora-coral/10 px-2.5 py-1 text-[0.68rem] font-semibold text-aurora-coral shadow-[0_0_18px_rgba(255,112,100,0.06)]"
+                    >
+                      <span
+                        class="h-1.5 w-1.5 rounded-full bg-aurora-coral"
+                      ></span>
+
+                      Ditunda
+                    </span>
+
+                  {{ else if eq $item.status "Dibatalkan" }}
+
+                    <span
+                      class="inline-flex items-center gap-1.5 rounded-full border border-aurora-coral/20 bg-aurora-coral/8 px-2.5 py-1 text-[0.68rem] font-semibold text-aurora-coral"
+                    >
+                      Dibatalkan
+                    </span>
+
+                  {{ else }}
+
+                    <span
+                      class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.025] px-2.5 py-1 text-[0.68rem] font-medium text-muted"
+                    >
+                      <span
+                        class="h-1.5 w-1.5 rounded-full bg-aurora-cyan"
+                      ></span>
+
+                      Terjadwal
+                    </span>
+
+                  {{ end }}
+
+                </div>
+
+
+                <h3
+                  class="mt-4 max-w-3xl text-xl font-semibold tracking-[-0.02em] text-foreground sm:text-2xl"
+                >
+                  {{ $item.name }}
+                </h3>
+
+
+                {{ if $item.theme }}
+
+                  <p
+                    class="mt-2 max-w-3xl text-sm leading-6 text-muted sm:text-base"
+                  >
+                    {{ $item.theme }}
+                  </p>
+
+                {{ end }}
+
+
+                <div
+                  class="mt-6 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr]"
+                >
+
+                  {{ if $item.speaker }}
+
+                    <div
+                      class="flex items-start gap-3 text-muted"
+                    >
+                      <svg
+                        class="mt-0.5 h-4 w-4 shrink-0 text-white/40"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.1a7.5 7.5 0 0 1 15 0"
+                        />
+                      </svg>
+
+                      <span>
+                        {{ $item.speaker }}
+                      </span>
+                    </div>
+
+                  {{ end }}
+
+
+                  {{ if $item.location }}
+
+                    <div
+                      class="flex items-start gap-3 text-muted"
+                    >
+                      <svg
+                        class="mt-0.5 h-4 w-4 shrink-0 text-white/40"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 21s6-4.35 6-11a6 6 0 1 0-12 0c0 6.65 6 11 6 11Z"
+                        />
+                        <circle
+                          cx="12"
+                          cy="10"
+                          r="2"
+                        />
+                      </svg>
+
+                      <span>
+                        {{ $item.location }}
+                      </span>
+                    </div>
+
+                  {{ end }}
+
+                </div>
+
+
+                {{ if $programPage }}
+
+                  <div
+                    class="mt-7 border-t border-white/8 pt-5"
+                  >
+
+                    <a
+                      href="{{ $programPage.RelPermalink }}"
+                      class="group/link inline-flex items-center gap-3 text-sm font-medium text-foreground transition hover:text-aurora-cyan"
+                    >
+
+                      <span class="text-muted">
+                        Program
+                      </span>
+
+                      <span>
+                        {{ $programPage.Title }}
+                      </span>
+
+                      <span
+                        class="flex h-7 w-7 items-center justify-center rounded-full bg-white/[0.04] text-muted transition duration-300 group-hover/link:translate-x-1 group-hover/link:bg-aurora-cyan/10 group-hover/link:text-aurora-cyan"
+                      >
+                        →
+                      </span>
+
+                    </a>
+
+                  </div>
+
+                {{ end }}
+
+              </div>
+
+            </div>
+
+          </article>
+
+        {{ end }}
+
+      </div>
+
+
+    {{ else }}
+
+      <div
+        class="rounded-2xl border border-white/8 bg-card px-6 py-12 text-center"
+      >
+
+        <div
+          class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-white/[0.04] text-xl text-muted"
+        >
+          ◌
+        </div>
+
+        <h3
+          class="mt-5 text-lg font-semibold text-foreground"
+        >
+          Belum ada agenda mendatang
+        </h3>
+
+        <p
+          class="mx-auto mt-2 max-w-md text-sm leading-6 text-muted"
+        >
+          Agenda kegiatan Masjid Al-Fath berikutnya
+          akan ditampilkan di halaman ini.
+        </p>
+
+      </div>
+
+    {{ end }}
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================================
+     FINISHED / ARCHIVE
+     ======================================================== -->
+
+{{ if gt (len $finished) 0 }}
+
+<section
+  class="border-t border-white/6 bg-surface py-12 lg:py-14"
+>
+
+  <div
+    class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8"
+  >
+
+    <details class="group">
+
+      <summary
+        class="flex cursor-pointer list-none items-center justify-between gap-5"
+      >
+
+        <div>
+
+          <div
+            class="text-xs font-semibold uppercase tracking-[0.18em] text-muted"
+          >
+            Riwayat
+          </div>
+
+          <h2
+            class="mt-2 text-xl font-semibold text-foreground"
+          >
+            Agenda selesai
+          </h2>
+
+        </div>
+
+
+        <div
+          class="flex items-center gap-3"
+        >
+
+          <span class="text-sm text-muted">
+            {{ len $finished }} agenda
+          </span>
+
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-full bg-white/[0.04] text-muted transition group-open:rotate-45"
+          >
+            +
+          </span>
+
+        </div>
+
+      </summary>
+
+
+      <div
+        class="mt-7 divide-y divide-white/6 border-t border-white/6"
+      >
+
+        {{ range $finished }}
+
+          <div
+            class="grid gap-3 py-5 sm:grid-cols-[90px_1fr_auto] sm:items-center"
+          >
+
+            <div
+              class="text-sm font-medium text-muted"
+            >
+              {{ .day }} {{ .month }}
+            </div>
+
+
+            <div>
+
+              <div
+                class="font-medium text-foreground/80"
+              >
+                {{ .name }}
+              </div>
+
+              {{ if .theme }}
+
+                <div
+                  class="mt-1 text-sm text-muted"
+                >
+                  {{ .theme }}
+                </div>
+
+              {{ end }}
+
+            </div>
+
+
+            <span
+              class="text-xs text-muted/70"
+            >
+              Selesai
+            </span>
+
+          </div>
+
+        {{ end }}
+
+      </div>
+
+    </details>
+
+  </div>
+
+</section>
+
+{{ end }}
+
+
+<!-- ========================================================
+     BOTTOM CTA
+     ======================================================== -->
+
+<section
+  class="border-t border-white/6 bg-base py-14"
+>
+
+  <div
+    class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8"
+  >
+
+    <div
+      class="relative overflow-hidden rounded-2xl border border-white/8 bg-card px-6 py-8 sm:px-8 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:px-10"
+    >
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute -right-20 -top-28 h-64 w-64 rounded-full bg-aurora-violet/8 blur-[90px]"
+      ></div>
+
+
+      <div class="relative max-w-2xl">
+
+        <div
+          class="text-xs font-semibold uppercase tracking-[0.18em] text-aurora-cyan"
+        >
+          Program Al-Fath
+        </div>
+
+        <h2
+          class="mt-3 text-xl font-semibold tracking-[-0.02em] text-foreground sm:text-2xl"
+        >
+          Kenali kegiatan yang berjalan di Masjid Al-Fath
+        </h2>
+
+        <p
+          class="mt-2 text-sm leading-6 text-muted"
+        >
+          Lihat program kajian, pembinaan, layanan jamaah,
+          serta kegiatan sosial yang tersedia.
+        </p>
+
+      </div>
+
+
+      <a
+        href="/program/"
+        class="relative mt-6 inline-flex shrink-0 items-center gap-3 rounded-xl bg-indigo px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-hover lg:mt-0"
+      >
+        Lihat Program
+        <span aria-hidden="true">→</span>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+{{ end }}
