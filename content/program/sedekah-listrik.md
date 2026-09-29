@@ -7,6 +7,7 @@ order: 11
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-80bb-86db-e84fcdcad84a"
+thumbnail: "/images/program/sedekah-listrik-1280.webp"
 ---
 ## Tentang Sedekah Listrik
 

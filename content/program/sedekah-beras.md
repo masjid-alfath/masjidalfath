@@ -7,6 +7,7 @@ order: 12
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-8024-a45d-ca28947eba62"
+thumbnail: "/images/program/sedekah-beras-1280.webp"
 ---
 ## Tentang Sedekah Beras
 

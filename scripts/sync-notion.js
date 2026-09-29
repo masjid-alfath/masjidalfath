@@ -88,6 +88,10 @@ function richTextToMarkdown(items = []) {
 
     if (!text) return "";
 
+    // CMS convention:
+    // <br>, <br/>, <br /> di Notion = line break di website.
+    text = text.replace(/<br\s*\/?>/gi, "<br>");
+
     // Escape characters that commonly interfere with Markdown.
     text = text.replace(/([\\`])/g, "\\$1");
 
@@ -325,10 +329,32 @@ async function blockToMarkdown(block) {
 
       if (!url) return "";
 
-      const caption =
+      const rawCaption =
         plainText(data.caption) || "";
 
-      return `![${caption}](${url})`;
+      // CMS convention:
+      // [size:100], [size:50], [size:25]
+      const sizeMatch =
+        rawCaption.match(/\[size:(100|50|25)\]/i);
+
+      const size =
+        sizeMatch ? sizeMatch[1] : "100";
+
+      // Metadata size tidak ikut menjadi alt/caption.
+      const caption =
+        rawCaption
+          .replace(/\[size:(100|50|25)\]/gi, "")
+          .trim();
+
+      // Jangan escape "&" pada signed URL Notion di sini.
+      // Hugo akan melakukan HTML escaping saat shortcode dirender.
+      const safeUrl = String(url)
+        .replace(/"/g, "%22");
+
+      const safeAlt = String(caption)
+        .replace(/"/g, "&quot;");
+
+      return `{{< content-image src="${safeUrl}" alt="${safeAlt}" size="${size}" >}}`;
     }
 
 

@@ -7,6 +7,7 @@ order: 1
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-8071-8307-fbd24ad1cbcb"
+thumbnail: "/images/program/akademi-santri-karya-al-fath-1280.webp"
 ---
 **Belajar di Masjid, Mengabdi untuk Umat, Berkarya Sepanjang Hayat.**
 
@@ -94,32 +95,18 @@ Setelah menyelesaikan masa pendidikan, peserta diharapkan menjadi pribadi yang:
 
 ## Lokasi Pendidikan
 
-📍 **Masjid Al-Fath**
-
-Komplek Bumi Panyileukan
-
-Jl. Sehati 9 No. 11
-
-Kelurahan Cipadung Kidul, Kecamatan Panyileukan
-
-Kota Bandung, Jawa Barat 40614
+📍 **Masjid Al-Fath : **Komplek Bumi Panyileukan, Jl. Sehati 9 No. 11 Kelurahan Cipadung Kidul, Kecamatan Panyileukan, Kota Bandung, Jawa Barat 40614
 
 ## Daftar Menjadi Santri ASKA
 
 Satu tahun untuk belajar, membangun diri, dekat dengan Al-Qur’an, memperoleh keterampilan, dan merasakan langsung bagaimana berkhidmat kepada masjid dan umat.
 
-**Kuota peserta terbatas.**
+**Kuota peserta terbatas**
 
-🔗 **Daftar Sekarang**
+{{< cta href="http://masjidalfath.org/" >}}Daftar Sekarang →{{< /cta >}}
 
-[Tempelkan Link Pendaftaran]
+---
 
-### Informasi & Konfirmasi Pendaftaran
+> Mari menjadi bagian dari generasi Qur’ani yang siap belajar, mengabdi, dan berkarya demi kemakmuran masjid dan kemaslahatan umat.
 
-📱 **WhatsApp Admin Masjid Al-Fath**
-
-**0821-2222-0615**
-
-**Mari menjadi bagian dari generasi Qur’ani yang siap belajar, mengabdi, dan berkarya demi kemakmuran masjid dan kemaslahatan umat.**
-
-**ASKA — Akademi Santri Karya Al-Fath**
+`ASKA — Akademi Santri Karya Al-Fath`

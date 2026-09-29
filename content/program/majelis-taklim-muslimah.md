@@ -9,8 +9,6 @@ generated_by_notion: true
 notion_id: "3e48dd44-636a-8056-b4e6-f87ee14c57a6"
 thumbnail: "/images/program/majelis-taklim-muslimah-1280.webp"
 ---
-## Tentang Program
-
 **Majelis Taklim Muslimah** adalah program pembinaan rutin yang menjadi ruang belajar bagi para muslimah untuk lebih dekat dengan Al-Qur’an dan memperdalam ilmu agama.
 
 Program ini menghadirkan pembelajaran yang dilakukan secara rutin, sehingga peserta dapat terus memperbaiki bacaan Al-Qur’an sekaligus membekali diri dengan ilmu yang bermanfaat dalam kehidupan sehari-hari.
@@ -25,15 +23,11 @@ Majelis Taklim Muslimah memiliki dua kegiatan utama:
 
 ## Jadwal Kegiatan
 
-- 📖 Tahsin Al-Qur’an**
-**Setiap Rabu
-10.30 WIB – Dzuhur
+- 📖 Tahsin Al-Qur’an : Setiap Rabu Pukul 10.30 WIB – Dzuhur
 
-- 🌿 Tazkiyatun Nafs
-Setiap Kamis
-10.30 WIB – Dzuhur
+- 🌿 Tazkiyatun Nafs : Setiap Kamis Pukul 10.30 WIB – Dzuhur
 
-📍 **Masjid Al-Fath, Bandung**
+📍 Lokasi @**Masjid Al-Fath**
 
 ## Untuk Siapa Program Ini?
 
@@ -41,8 +35,6 @@ Program ini terbuka bagi **muslimah yang ingin belajar Al-Qur’an dan memperdal
 
 Majelis ini juga menjadi ruang untuk bertemu dengan sesama muslimah dalam lingkungan belajar yang insyaAllah dapat saling menguatkan dalam kebaikan.
 
-## Mari Bertumbuh Bersama
+{{< cta href="https://wa.me/6282122220615?text=Admin%2C%20saya%20mau%20ikut%20Majelis%20Taklim%20Muslimah" >}}Chat Admin WhatsApp{{< /cta >}}
 
-Belajar agama bukan perjalanan yang selesai dalam satu atau dua pertemuan. Ia adalah proses yang terus dijalani sepanjang kehidupan.
-
-**Mari luangkan waktu untuk Al-Qur’an, ilmu, dan memperbaiki diri bersama Majelis Taklim Muslimah.**
+> Mari luangkan waktu untuk Al-Qur’an, ilmu, dan memperbaiki diri bersama Majelis Taklim Muslimah.

@@ -7,6 +7,7 @@ order: 13
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-80d7-a3d0-fd02024a36f6"
+thumbnail: "/images/program/sedekah-buka-puasa-1280.webp"
 ---
 ## Tentang Sedekah Buka Puasa
 

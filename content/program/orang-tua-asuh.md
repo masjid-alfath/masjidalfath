@@ -7,6 +7,7 @@ order: 14
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-8033-870e-f3f7adb5cddd"
+thumbnail: "/images/program/orang-tua-asuh-1280.webp"
 ---
 ## Tentang Orang Tua Asuh
 

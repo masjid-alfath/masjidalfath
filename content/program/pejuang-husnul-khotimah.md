@@ -7,9 +7,8 @@ order: 2
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e48dd44-636a-801a-a628-e1591f105855"
+thumbnail: "/images/program/pejuang-husnul-khotimah-1280.webp"
 ---
-## Tentang Program
-
 **Pejuang Husnul Khotimah (PHK)** merupakan program pembinaan selama satu tahun yang dihadirkan sebagai ruang bagi para lansia untuk terus belajar, bertumbuh, dan mengisi masa tua dengan kegiatan yang bermanfaat.
 
 Melalui program ini, peserta diajak untuk lebih dekat dengan Al-Qur’an, mempelajari ilmu agama, serta membangun kebiasaan baik melalui kegiatan yang dilakukan secara rutin dan terarah.
@@ -28,11 +27,7 @@ Pembinaan dalam Pejuang Husnul Khotimah mencakup beberapa kegiatan utama, di ant
 
 ## Pelaksanaan Program
 
-📅 Setiap Sabtu**
-**🕗 08.00–12.00 WIB**
-**📍 Offline di Bandung
-
-💳 **Gratis**
+📅 Setiap Sabtu Pukul 08.00–12.00 WIB
 
 Program dilaksanakan secara rutin selama **satu tahun**, sehingga peserta tidak hanya mengikuti kajian sesaat, tetapi menjalani proses pembinaan secara berkelanjutan.
 
@@ -46,4 +41,6 @@ Tidak perlu merasa terlambat untuk mulai belajar. Selama Allah masih memberikan 
 
 Masa tua bukanlah akhir dari perjalanan untuk belajar dan beramal. Justru ia dapat menjadi kesempatan berharga untuk semakin dekat kepada Allah dan mempersiapkan akhir kehidupan yang baik.
 
-**Mari isi usia dengan Al-Qur’an, ilmu, dan amal saleh.**
+Mari isi usia dengan Al-Qur’an, ilmu, dan amal saleh.
+
+> Pendaftaran Pejuang Husnul Khotimah Angkatan #2 Telah ditutup

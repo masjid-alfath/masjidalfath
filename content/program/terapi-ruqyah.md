@@ -7,6 +7,7 @@ order: 9
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-80e1-a094-f702e5aedb6b"
+thumbnail: "/images/program/terapi-ruqyah-1280.webp"
 ---
 ## Tentang Layanan
 
@@ -49,3 +50,5 @@ Jamaah dianjurkan untuk mengikuti layanan dengan niat berikhtiar dan memohon per
 Kesembuhan berada di tangan Allah. Ruqyah syar’iyyah merupakan salah satu ikhtiar seorang muslim dengan membaca Al-Qur’an dan doa-doa yang disyariatkan sembari tetap bertawakal kepada-Nya.
 
 **Berikhtiar dengan cara yang syar’i, menjaga tauhid, dan memohon kesembuhan hanya kepada Allah.**
+
+{{< cta href="https://wa.me/6282122220615?text=Assalamualaikum%20Admin%2C%20saya%20mau%20daftar%20*Terapi%20Ruqyah*" >}}Daftar Terapi Ruqyah{{< /cta >}}

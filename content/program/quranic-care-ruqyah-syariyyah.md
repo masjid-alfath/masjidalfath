@@ -7,6 +7,7 @@ order: 7
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-803a-857d-d0f6dbeb07f1"
+thumbnail: "/images/program/quranic-care-ruqyah-syariyyah-1280.webp"
 ---
 ## Tentang Program
 
@@ -38,4 +39,6 @@ Jamaah diajak untuk menjadikan Al-Qur’an, doa, dzikir, dan penguatan tauhid se
 
 Ahad setiap bulan 1x
 
-**Mari memahami ruqyah dengan ilmu, menjaga tauhid, dan menjadikan Al-Qur’an sebagai bagian dari kehidupan.**
+{{< cta href="https://chat.whatsapp.com/JtEPBh168ZTIOqhvFG6pKa" >}}Gabung Grup Whatsapp{{< /cta >}}
+
+> Mari memahami ruqyah dengan ilmu, menjaga tauhid, dan menjadikan Al-Qur’an sebagai bagian dari kehidupan.

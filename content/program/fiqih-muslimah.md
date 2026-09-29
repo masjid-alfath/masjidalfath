@@ -9,8 +9,6 @@ generated_by_notion: true
 notion_id: "3e48dd44-636a-80d2-b6b1-cc5795529e0b"
 thumbnail: "/images/program/fiqih-muslimah-1280.webp"
 ---
-## Tentang Program
-
 **Kajian Fiqih Muslimah** adalah kajian rutin yang membahas berbagai persoalan fiqih yang berkaitan erat dengan kehidupan seorang muslimah.
 
 Materi dipelajari secara bertahap agar peserta tidak hanya mengetahui hukum, tetapi juga memahami bagaimana menjalankan ibadah dan aktivitas sehari-hari sesuai dengan tuntunan syariat.
@@ -31,10 +29,9 @@ Materi disampaikan secara berurutan sehingga peserta dapat mengikuti pembelajara
 
 ## Jadwal Kajian
 
-📅 Setiap Jumat
-🕜 13.30 WIB
+📅 Setiap Jumat Pukul 13.30 WIB
 
-📍 **Masjid Al-Fath, Bandung**
+📍 Lokasi @**Masjid Al-Fath, Bandung**
 
 ## Untuk Siapa Kajian Ini?
 
@@ -44,4 +41,6 @@ Kajian ini ditujukan khusus bagi **muslimah yang ingin mempelajari fiqih secara 
 
 Banyak persoalan dalam kehidupan muslimah yang membutuhkan pemahaman fiqih yang benar. Dengan ilmu, seorang muslimah dapat menjalankan ibadah dengan lebih tenang karena mengetahui dasar dan tuntunan yang dipelajarinya.
 
-**Mari terus belajar agar setiap ibadah dijalankan di atas ilmu.**
+{{< cta href="https://chat.whatsapp.com/Huhhu4WfLshCXQEJF6Dx9Z" >}}Gabung Grup Whatsapp{{< /cta >}}
+
+> Mari terus belajar agar setiap ibadah dijalankan di atas ilmu.

@@ -6,3 +6,8 @@ enableRobotsTXT: true
 
 params:
   description: "Masjid Al-Fath — Pusat Dakwah Al-Qur'an dan Pembinaan Umat."
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

@@ -27,8 +27,4 @@ Jumat Kasep terbuka bagi **jamaah dan masyarakat** yang ingin memanfaatkan layan
 
 Pelaksanaan mengikuti jadwal yang diumumkan oleh Masjid Al-Fath. Jamaah dapat mengikuti informasi terbaru melalui media sosial dan kanal informasi resmi masjid.
 
-## Masjid yang Hadir untuk Jamaah
-
-Masjid bukan hanya tempat untuk menunaikan shalat. Masjid juga dapat menjadi tempat bertemunya jamaah, tumbuhnya kepedulian, dan hadirnya berbagai manfaat bagi masyarakat.
-
-**Jumat Kasep — datang ke masjid, ibadah semakin nyaman, pulang semakin kasep.**
+{{< cta href="https://wa.me/6282122220615?text=Assalamualaikum%20Admin%2C%20saya%20mau%20daftar%20*Jumat%20Kasep*" >}}Daftar Jumat Kasep{{< /cta >}}

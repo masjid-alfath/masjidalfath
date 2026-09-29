@@ -1256,25 +1256,66 @@ html:not(.dark) .footer-map-link:hover {
 
 .article-content .content-copy {
   display: inline-flex;
-  min-height: 44px;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
+  gap: 0.65rem;
 
   margin-top: 0.35rem;
   margin-bottom: 0.75rem;
 
-  padding: 0.75rem 1.1rem;
+  padding: 0.8rem 1.15rem;
 
-  color: #fff;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 0.025);
+
+  color: var(--color-foreground);
+  font-family: inherit;
   font-size: var(--text-sm);
   font-weight: 600;
   line-height: 1.2;
 
   cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.article-content .content-copy:hover {
+  border-color: rgb(102 201 255 / 0.28);
+  background: rgb(255 255 255 / 0.055);
+  color: #fff;
+}
+
+.article-content .content-copy:active {
+  transform: translateY(1px);
+}
+
+.article-content .content-copy-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+}
+
+.article-content .content-copy-icon svg {
+  display: block;
+}
+
+.article-content .content-copy-label {
+  color: inherit;
+  line-height: inherit;
 }
 
 .article-content .content-copy-success {
   display: none;
+  color: inherit;
 }
 
 .article-content .content-copy-success:not(.hidden) {
@@ -1282,9 +1323,58 @@ html:not(.dark) .footer-map-link:hover {
 }
 
 .article-content .content-copy.is-copied {
+  border-color: rgb(102 201 255 / 0.38);
+  background: rgb(102 201 255 / 0.07);
+
   box-shadow:
-    0 0 0 1px rgb(102 201 255 / 0.20),
-    0 8px 28px rgb(52 54 168 / 0.22);
+    0 0 0 1px rgb(102 201 255 / 0.08),
+    0 8px 28px rgb(52 54 168 / 0.14);
+}
+
+.article-content .content-copy.is-copied .content-copy-icon {
+  display: none;
+}
+
+
+/* ==========================================================
+   CONTENT IMAGE
+   Notion [size:100|50|25]
+   ========================================================== */
+
+.article-content .content-image {
+  margin-block: 1.5rem;
+}
+
+.article-content .content-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 1rem;
+}
+
+.article-content .content-image--100 {
+  width: 100%;
+}
+
+.article-content .content-image--50 {
+  width: 50%;
+  margin-inline: 0;
+}
+
+.article-content .content-image--25 {
+  width: 25%;
+  margin-inline: 0;
+}
+
+/* Mobile: semua content image tampil full width */
+@media (max-width: 639px) {
+  .article-content .content-image--100,
+  .article-content .content-image--50,
+  .article-content .content-image--25 {
+    width: 100%;
+    margin-inline: 0;
+  }
 }
 
 
