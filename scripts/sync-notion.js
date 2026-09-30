@@ -253,10 +253,101 @@ async function processThumbnail(url, slug) {
 
 
 /* =========================================================
+   NOTION CONTENT IMAGE PIPELINE
+   File image Notion → local WebP
+   ========================================================= */
+
+async function processNotionContentImage(
+  url,
+  blockId,
+  context = {}
+) {
+
+  if (!url) return "";
+
+  const section = context.section;
+  const slug = context.slug;
+
+  /*
+   * Hanya localize ketika page memberikan context.
+   * Pemanggilan lama tetap backward-compatible.
+   */
+  if (!section || !slug) {
+    return url;
+  }
+
+  const safeBlockId =
+    String(blockId || "image")
+      .replace(/-/g, "")
+      .replace(/[^a-zA-Z0-9]/g, "");
+
+  const outputDir =
+    path.join(
+      process.cwd(),
+      "static",
+      "images",
+      "notion",
+      section,
+      slug
+    );
+
+  await fs.mkdir(
+    outputDir,
+    { recursive: true }
+  );
+
+  const filename =
+    `${safeBlockId}.webp`;
+
+  const destination =
+    path.join(
+      outputDir,
+      filename
+    );
+
+  console.log(
+    `  ↓ Download content image: ${section}/${slug}/${filename}`
+  );
+
+  const response =
+    await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(
+      `Content image download gagal: ${response.status} (${slug})`
+    );
+  }
+
+  const buffer =
+    Buffer.from(
+      await response.arrayBuffer()
+    );
+
+  await sharp(buffer)
+    .rotate()
+    .resize({
+      width: 1600,
+      withoutEnlargement: true,
+    })
+    .webp({
+      quality: 88,
+      effort: 5,
+    })
+    .toFile(destination);
+
+  console.log(
+    `    ✓ ${filename}`
+  );
+
+  return `/images/notion/${section}/${slug}/${filename}`;
+}
+
+
+/* =========================================================
    BLOCK → MARKDOWN
    ========================================================= */
 
-async function blockToMarkdown(block) {
+async function blockToMarkdown(block, context = {}) {
 
   const type = block.type;
   const data = block[type];
@@ -322,6 +413,9 @@ async function blockToMarkdown(block) {
 
     case "image": {
 
+      const isNotionFile =
+        data.type === "file";
+
       const url =
         data.type === "external"
           ? data.external?.url
@@ -340,19 +434,34 @@ async function blockToMarkdown(block) {
       const size =
         sizeMatch ? sizeMatch[1] : "100";
 
-      // Metadata size tidak ikut menjadi alt/caption.
+      // Metadata size tidak ikut menjadi alt.
       const caption =
         rawCaption
           .replace(/\[size:(100|50|25)\]/gi, "")
           .trim();
 
-      // Jangan escape "&" pada signed URL Notion di sini.
-      // Hugo akan melakukan HTML escaping saat shortcode dirender.
-      const safeUrl = String(url)
-        .replace(/"/g, "%22");
+      /*
+       * File yang di-upload ke Notion menggunakan signed URL
+       * sementara. Download menjadi WebP lokal saat sync.
+       *
+       * External image tetap menggunakan URL sumbernya.
+       */
+      const imageUrl =
+        isNotionFile
+          ? await processNotionContentImage(
+              url,
+              block.id,
+              context
+            )
+          : url;
 
-      const safeAlt = String(caption)
-        .replace(/"/g, "&quot;");
+      const safeUrl =
+        String(imageUrl)
+          .replace(/"/g, "%22");
+
+      const safeAlt =
+        String(caption)
+          .replace(/"/g, "&quot;");
 
       return `{{< content-image src="${safeUrl}" alt="${safeAlt}" size="${size}" >}}`;
     }
@@ -393,7 +502,7 @@ async function blockToMarkdown(block) {
 }
 
 
-async function pageBodyToMarkdown(pageId, client = notion) {
+async function pageBodyToMarkdown(pageId, client = notion, context = {}) {
 
   const blocks =
     await getAllChildren(pageId, client);
@@ -403,7 +512,10 @@ async function pageBodyToMarkdown(pageId, client = notion) {
   for (const block of blocks) {
 
     let markdown =
-      await blockToMarkdown(block);
+      await blockToMarkdown(
+        block,
+        context
+      );
 
     if (markdown) {
       output.push(markdown);
@@ -417,7 +529,11 @@ async function pageBodyToMarkdown(pageId, client = notion) {
     if (block.has_children) {
 
       const children =
-        await pageBodyToMarkdown(block.id, client);
+        await pageBodyToMarkdown(
+          block.id,
+          client,
+          context
+        );
 
       if (children.trim()) {
         output.push(children);
@@ -1597,7 +1713,11 @@ description: "Beragam program Masjid Al-Fath untuk menemani jamaah belajar, beri
     const body =
       await pageBodyToMarkdown(
         program.pageId,
-        notionProgram
+        notionProgram,
+        {
+          section: "program",
+          slug: program.slug,
+        }
       );
 
 
