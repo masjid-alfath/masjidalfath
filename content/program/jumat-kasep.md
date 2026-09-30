@@ -3,7 +3,7 @@ title: "Jumat Kasep"
 slug: "jumat-kasep"
 category: "Layanan Jamaah"
 summary: "Layanan cukur rambut gratis bagi jamaah dan masyarakat di Masjid Al-Fath."
-order: 8
+order: 13
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e48dd44-636a-80c7-9f91-ccf2642732cc"

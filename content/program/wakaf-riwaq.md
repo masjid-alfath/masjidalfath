@@ -3,7 +3,7 @@ title: "Wakaf Riwaq"
 slug: "wakaf-riwaq"
 category: "Sosial & Sedekah"
 summary: "Program wakaf untuk pembangunan dan penyempurnaan area Riwaq Masjid Al-Fath."
-order: 10
+order: 9
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-805e-bad3-ced4d081aeae"

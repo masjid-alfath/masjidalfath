@@ -3,14 +3,12 @@ title: "Sedekah Buka Puasa"
 slug: "sedekah-buka-puasa"
 category: "Sosial & Sedekah"
 summary: "Program berbagi hidangan berbuka untuk santri dan jamaah Masjid Al-Fath."
-order: 13
+order: 12
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-80d7-a3d0-fd02024a36f6"
 thumbnail: "/images/program/sedekah-buka-puasa-1280.webp"
 ---
-## Tentang Sedekah Buka Puasa
-
 **Sedekah Buka Puasa** adalah program berbagi hidangan berbuka untuk santri dan jamaah Masjid Al-Fath.
 
 Melalui program ini, jamaah dapat ikut menyediakan makanan bagi mereka yang sedang menjalankan ibadah puasa sekaligus mendukung kebersamaan dan berbagai kegiatan ibadah di lingkungan masjid.
@@ -19,35 +17,25 @@ Melalui program ini, jamaah dapat ikut menyediakan makanan bagi mereka yang seda
 
 Hidangan berbuka akan disalurkan untuk:
 
-- **Santri Ma’had Tahfidz Al-Fath** yang sedang menjalani pendidikan dan menghafal Al-Qur’an.
+- **Santri Ma’had Tahfidz Al-Fath**
 
-- **Jamaah Masjid Al-Fath** yang melaksanakan ibadah puasa dan berbuka di lingkungan masjid.
+- **Jamaah Masjid Al-Fath**
 
-Sedekah dapat diberikan dalam bentuk **hidangan berbuka secara langsung** maupun berupa dana yang akan digunakan untuk menyediakan kebutuhan buka puasa.
+Yang sedang menjalankan Puasa, baik sunnah atau wajib
 
-## Salurkan Sedekah
+Sedekah dapat diberikan dalam bentuk **hidangan berbuka secara langsung** maupun berupa harta yang akan digunakan untuk menyediakan kebutuhan buka puasa.
 
-Sedekah berupa dana dapat disalurkan melalui:
+## Salurkan Sedekah Melalui
 
-🏦 **Bank Syariah Indonesia (BSI)**
-
-**69 222 0000 7**
-
-a.n. **Masjid Al-Fath**
+🏦 Bank Syariah Indonesia (BSI)<br>**69 222 0000 7**<br>An. Masjid Al-Fath
 
 {{< copy value="6922200007" >}}Salin Nomor Rekening{{< /copy >}}
 
-Sedekah juga dapat disalurkan melalui **QRIS Sedekah Masjid Al-Fath**.
+Atau melalui **QRIS Sedekah Masjid Al-Fath**.
 
-### Konfirmasi Sedekah
+{{< content-image src="/images/notion/program/sedekah-buka-puasa/3eb8dd44636a8019b8e8ddefa4fe2d2b.webp" alt="" size="50" >}}
 
-Setelah melakukan transfer, silakan konfirmasi kepada:
-
-📱 **Admin Masjid Al-Fath**
-
-**+62 821-2222-0615**
-
-Mohon sertakan bukti transfer dan keterangan **“Sedekah Buka Puasa”** agar sedekah dapat dicatat dan dialokasikan sesuai peruntukannya.
+{{< cta href="https://wa.me/6282122220615?text=Assalamualaikum%20Admin%2C%20saya%20mau%20konfirmasi%20*Sedekah%20Buka%20Puasa*" >}}Konfirmasi Sedekah{{< /cta >}}
 
 ## Berbagi Kebahagiaan Saat Berbuka
 

@@ -197,7 +197,7 @@
     >
 
       <nav
-        class="flex flex-col gap-1"
+        class="flex flex-col gap-2"
         aria-label="Navigasi mobile"
       >
         <a
@@ -238,7 +238,7 @@
 
         <a
           href="/ziswaf/"
-          class="mobile-ziswaf{{ if hasPrefix $path "/ziswaf/" }} is-active{{ end }}"
+          class="mobile-ziswaf mt-2{{ if hasPrefix $path "/ziswaf/" }} is-active{{ end }}"
           {{ if hasPrefix $path "/ziswaf/" }}aria-current="page"{{ end }}
         >
           ZISWAF

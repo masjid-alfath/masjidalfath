@@ -3,14 +3,12 @@ title: "Sedekah Beras"
 slug: "sedekah-beras"
 category: "Sosial & Sedekah"
 summary: "Program pemenuhan kebutuhan beras bagi santri Ma’had Tahfidz dan pengurus Masjid Al-Fath."
-order: 12
+order: 11
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-8024-a45d-ca28947eba62"
 thumbnail: "/images/program/sedekah-beras-1280.webp"
 ---
-## Tentang Sedekah Beras
-
 **Sedekah Beras** adalah program untuk membantu memenuhi kebutuhan makan harian para santri penghafal Al-Qur’an dan pengurus Masjid Al-Fath.
 
 Beras yang diberikan akan digunakan untuk kebutuhan konsumsi sehari-hari, sehingga para santri dapat menjalani kegiatan belajar dan menghafal Al-Qur’an dengan baik, serta membantu kebutuhan para pengurus yang menjalankan berbagai pelayanan di masjid.
@@ -29,26 +27,16 @@ Sedekah dapat diberikan dalam bentuk **beras secara langsung** maupun berupa dan
 
 Sedekah berupa dana dapat disalurkan melalui:
 
-🏦 **Bank Syariah Indonesia (BSI)**
+🏦 Bank Syariah Indonesia (BSI)<br>**69 222 0000 7**<br>An. Masjid Al-Fath
 
-**69 222 0000 7**
+{{< copy value="6922200007" >}}Salin Nomor Rekening{{< /copy >}}
 
-a.n. **Masjid Al-Fath**
+Atau melalui **QRIS Sedekah Masjid Al-Fath**.
 
-Sedekah juga dapat disalurkan melalui **QRIS Sedekah Masjid Al-Fath**.
+{{< content-image src="/images/notion/program/sedekah-beras/3eb8dd44636a80b984b5c096aa0bac4f.webp" alt="" size="50" >}}
 
-### Konfirmasi Sedekah
+{{< cta href="https://wa.me/6282122220615?text=Assalamualaikum%20Admin%2C%20saya%20mau%20konfirmasi%20*Sedekah%20Beras*" >}}Konfirmasi Sedekah{{< /cta >}}
 
-Setelah melakukan transfer, silakan konfirmasi kepada:
+`Mohon sertakan bukti transfer dan keterangan Wakaf Riwaq saat melakukan konfirmasi.`
 
-📱 **Admin Masjid Al-Fath**
-
-**+62 821-2222-0615**
-
-Mohon sertakan bukti transfer dan keterangan **“Sedekah Beras”** agar sedekah dapat dicatat dan dialokasikan sesuai peruntukannya.
-
-## Dari Beras Menjadi Tenaga untuk Kebaikan
-
-Sepiring nasi mungkin terlihat sederhana. Namun darinya ada tenaga untuk menghafal Al-Qur’an, menuntut ilmu, mengurus masjid, dan menjalankan berbagai aktivitas kebaikan.
-
-**Mari ikut memenuhi kebutuhan makan santri dan pengurus melalui Sedekah Beras.**
+> **Mari ikut memenuhi kebutuhan makan santri dan pengurus melalui Sedekah Beras.**

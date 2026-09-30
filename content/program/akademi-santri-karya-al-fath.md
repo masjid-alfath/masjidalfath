@@ -110,3 +110,5 @@ Satu tahun untuk belajar, membangun diri, dekat dengan Al-Qur’an, memperoleh k
 > Mari menjadi bagian dari generasi Qur’ani yang siap belajar, mengabdi, dan berkarya demi kemakmuran masjid dan kemaslahatan umat.
 
 `ASKA — Akademi Santri Karya Al-Fath`
+
+{{< content-image src="/images/notion/program/akademi-santri-karya-al-fath/3eb8dd44636a80289f32d41dead8b5a4.webp" alt="" size="100" >}}
