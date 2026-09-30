@@ -37,7 +37,7 @@ Jamaah diajak untuk menjadikan Al-Qur’an, doa, dzikir, dan penguatan tauhid se
 
 ## Jadwal Kegiatan
 
-Ahad setiap bulan 1x
+📌 Ahad 1x Setiap Bulan
 
 {{< cta href="https://chat.whatsapp.com/JtEPBh168ZTIOqhvFG6pKa" >}}Gabung Grup Whatsapp{{< /cta >}}
 

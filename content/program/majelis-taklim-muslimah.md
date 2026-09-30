@@ -23,9 +23,9 @@ Majelis Taklim Muslimah memiliki dua kegiatan utama:
 
 ## Jadwal Kegiatan
 
-- 📖 Tahsin Al-Qur’an : Setiap Rabu Pukul 10.30 WIB – Dzuhur
+- 📖 Tahsin Al-Qur’an: <br>Setiap Rabu Pukul 10.30 WIB – Dzuhur
 
-- 🌿 Tazkiyatun Nafs : Setiap Kamis Pukul 10.30 WIB – Dzuhur
+- 🌿 Tazkiyatun Nafs: <br>Setiap Kamis Pukul 10.30 WIB – Dzuhur
 
 📍 Lokasi @**Masjid Al-Fath**
 

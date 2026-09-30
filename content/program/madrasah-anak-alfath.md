@@ -53,7 +53,7 @@ Dengan kombinasi tersebut, proses belajar diharapkan tidak terasa monoton dan te
 
 ### ⏱️ Waktu Pembelajaran
 
-Kegiatan belajar dilaksanakan:<br>**Senin–Jumat**<br>**Pukul 16.00 WIB – selesai**
+Kegiatan belajar dilaksanakan:<br>- **Senin sd Jumat**<br>- **Pukul 16.00 WIB – selesai**
 
 ### Persyaratan Peserta
 

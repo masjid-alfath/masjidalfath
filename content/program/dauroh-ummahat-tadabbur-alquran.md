@@ -1,5 +1,5 @@
 ---
-title: "Dauroh Ummahat Tadabbur Quran"
+title: "Dauroh Ummahat Tadabbur Al-Quran"
 slug: "dauroh-ummahat-tadabbur-alquran"
 category: "Kajian & Pendidikan"
 summary: "Program khusus muslimah untuk memahami dan mentadabburi ayat-ayat Al-Qur’an."
@@ -29,11 +29,7 @@ Dalam setiap pertemuan, peserta diajak untuk:
 
 ## Jadwal Pembelajaran
 
-📅 Setiap Senin
-
-🕤 89.30–11.00 WIB
-
-📖 **Materi: Tadabbur Juz 30**
+📅 Setiap Senin<br>🕤 Pukul 08.30–11.00 WIB<br>📖 **Materi: Tadabbur Juz 30**
 
 Pembelajaran dilakukan secara rutin agar peserta dapat mengikuti perjalanan tadabbur Al-Qur’an secara bertahap dan berkesinambungan.
 
@@ -43,6 +39,8 @@ DUTA ditujukan khusus bagi **muslimah yang ingin membangun kedekatan yang lebih 
 
 Tidak harus menunggu mampu memahami seluruh isi Al-Qur’an untuk mulai mentadabburinya. Perjalanan itu dapat dimulai dari satu surat, satu ayat, dan satu pelajaran yang kemudian berusaha diamalkan.
 
-{{< content-image src="/images/notion/program/dauroh-ummahat-tadabbur-alquran/3ea8dd44636a80f882feebcfecc655e9.webp" alt="" size="100" >}}
-
 {{< cta href="https://s.id/dutabatch2" >}}Daftar Angkatan 2{{< /cta >}}
+
+---
+
+{{< content-image src="/images/notion/program/dauroh-ummahat-tadabbur-alquran/3ea8dd44636a80f882feebcfecc655e9.webp" alt="" size="100" >}}

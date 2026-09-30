@@ -3,7 +3,7 @@ title: "Sedekah Buka Puasa"
 slug: "sedekah-buka-puasa"
 category: "Sosial & Sedekah"
 summary: "Program berbagi hidangan berbuka untuk santri dan jamaah Masjid Al-Fath."
-order: 12
+order: 14
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-80d7-a3d0-fd02024a36f6"

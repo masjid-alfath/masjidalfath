@@ -95,7 +95,7 @@ Setelah menyelesaikan masa pendidikan, peserta diharapkan menjadi pribadi yang:
 
 ## Lokasi Pendidikan
 
-📍 **Masjid Al-Fath : **Komplek Bumi Panyileukan, Jl. Sehati 9 No. 11 Kelurahan Cipadung Kidul, Kecamatan Panyileukan, Kota Bandung, Jawa Barat 40614
+📍 **Masjid Al-Fath** : Komplek Bumi Panyileukan, Jl. Sehati 9 No. 11 Kelurahan Cipadung Kidul, Kecamatan Panyileukan, Kota Bandung, Jawa Barat 40614
 
 ## Daftar Menjadi Santri ASKA
 
@@ -103,7 +103,7 @@ Satu tahun untuk belajar, membangun diri, dekat dengan Al-Qur’an, memperoleh k
 
 **Kuota peserta terbatas**
 
-{{< cta href="http://masjidalfath.org/" >}}Daftar Sekarang →{{< /cta >}}
+{{< cta href="https://tally.so/r/q4q1Wd" >}}Daftar Sekarang →{{< /cta >}}
 
 ---
 

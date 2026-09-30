@@ -3,7 +3,7 @@ title: "Sedekah Beras"
 slug: "sedekah-beras"
 category: "Sosial & Sedekah"
 summary: "Program pemenuhan kebutuhan beras bagi santri Ma’had Tahfidz dan pengurus Masjid Al-Fath."
-order: 11
+order: 13
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-8024-a45d-ca28947eba62"

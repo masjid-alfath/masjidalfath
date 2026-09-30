@@ -31,13 +31,7 @@ Pembelajaran disusun secara bertahap dengan beberapa fokus utama:
 
 ## Jadwal Pembelajaran
 
-📅 **Setiap Senin Malam**
-
-🕗 **20.00 WIB**
-
-💻 **Online melalui Zoom**
-
-📖 **Kitab: Durusul Lughah Jilid 2**
+📅 **Setiap Senin Malam**<br>🕗 **20.00 WIB**<br>💻 **Online melalui Zoom**<br>📖 **Kitab: Durusul Lughah Jilid 2**
 
 ## Fasilitas Kelas
 

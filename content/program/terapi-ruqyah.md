@@ -3,7 +3,7 @@ title: "Terapi Ruqyah Syariyyah"
 slug: "terapi-ruqyah"
 category: "Layanan Jamaah"
 summary: "Layanan pendampingan ruqyah dengan ayat Al-Qur’an dan doa sesuai tuntunan syariat."
-order: 14
+order: 10
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-80e1-a094-f702e5aedb6b"
@@ -27,12 +27,9 @@ Dalam proses pendampingan, jamaah akan diarahkan melalui beberapa tahapan sesuai
 
 ## Jadwal Layanan
 
-📅 **Selasa**<br>**
-**🕘 09.00 WIB – Dzuhur<br>
-🕐 13.00–17.00 WIB
+- 🗓️ **Selasa**<br>🕘 09.00 WIB – Dzuhur<br>🕐 13.00–17.00 WIB
 
-📅 **Kamis**<br>**
-**🕐 13.00–17.00 WIB
+- 🗓️ **Kamis**<br>🕐 13.00–17.00 WIB
 
 📍 **Masjid Al-Fath, Bandung**
 

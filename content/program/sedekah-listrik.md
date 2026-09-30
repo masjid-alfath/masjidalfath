@@ -3,7 +3,7 @@ title: "Sedekah Listrik"
 slug: "sedekah-listrik"
 category: "Sosial & Sedekah"
 summary: "Program sedekah untuk membantu memenuhi kebutuhan listrik dan aktivitas Masjid Al-Fath."
-order: 10
+order: 12
 status: "Aktif"
 generated_by_notion: true
 notion_id: "3e98dd44-636a-80bb-86db-e84fcdcad84a"
