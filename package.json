@@ -7,10 +7,11 @@
     "dev:css": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/main.css --watch",
     "dev:hugo": "hugo server --disableFastRender",
     "dev": "concurrently \"npm:dev:css\" \"npm:dev:hugo\"",
+    "sync:notion": "node scripts/sync-notion.js",
+    "sync": "npm run sync:notion",
     "build:css": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/main.css --minify",
-    "build:hugo": "hugo --minify",
-    "build": "npm run build:css && npm run build:hugo",
-    "sync:notion": "node scripts/sync-notion.js"
+    "build:hugo": "hugo --cleanDestinationDir --minify",
+    "build": "npm run sync && npm run build:css && npm run build:hugo"
   },
   "keywords": [],
   "author": "",
