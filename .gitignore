@@ -1,3 +1,22 @@
+# Environment / secrets
 .env
+.env.*
+!.env.example
+
+# Dependencies
 node_modules/
+
+# Hugo output / temporary
 public/
+resources/
+.hugo_build.lock
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor / patch backups
+*.before-*
+*.bak
+*.orig
+*~
