@@ -357,8 +357,30 @@ async function blockToMarkdown(block, context = {}) {
 
   switch (type) {
 
-    case "paragraph":
+    case "paragraph": {
+      /*
+       * CMS convention:
+       *
+       * [TALLY] https://tally.so/r/q4q1Wd
+       * [TALLY] https://tally.so/embed/q4q1Wd
+       *
+       * Gunakan plainText agar tetap terdeteksi meskipun
+       * Notion otomatis menjadikan URL sebagai hyperlink.
+       */
+      const rawText =
+        plainText(data.rich_text).trim();
+
+      const tallyMatch =
+        rawText.match(
+          /^\[TALLY\]\s+https:\/\/(?:www\.)?tally\.so\/(?:r|embed)\/([a-zA-Z0-9]+)(?:[/?#].*)?$/i
+        );
+
+      if (tallyMatch) {
+        return `{{< tally id="${tallyMatch[1]}" >}}`;
+      }
+
       return richTextToMarkdown(data.rich_text);
+    }
 
 
     case "heading_1":

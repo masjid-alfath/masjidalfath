@@ -9,6 +9,8 @@ generated_by_notion: true
 notion_id: "3e98dd44-636a-8071-8307-fbd24ad1cbcb"
 thumbnail: "/images/program/akademi-santri-karya-al-fath-1280.webp"
 ---
+{{< content-image src="/images/notion/program/akademi-santri-karya-al-fath/3ed8dd44636a803ba4edd016497236aa.webp" alt="" size="100" >}}
+
 **Belajar di Masjid, Mengabdi untuk Umat, Berkarya Sepanjang Hayat.**
 
 **Akademi Santri Karya Al-Fath (ASKA)** adalah program kaderisasi intensif selama **1 tahun** yang memadukan pembinaan ruhiyah, pendidikan Al-Qur’an, kepemimpinan, keterampilan kerja (life skill), dan pengabdian kepada masyarakat.
@@ -101,14 +103,14 @@ Setelah menyelesaikan masa pendidikan, peserta diharapkan menjadi pribadi yang:
 
 Satu tahun untuk belajar, membangun diri, dekat dengan Al-Qur’an, memperoleh keterampilan, dan merasakan langsung bagaimana berkhidmat kepada masjid dan umat.
 
-**Kuota peserta terbatas**
-
-{{< cta href="https://tally.so/r/q4q1Wd" >}}Daftar Sekarang →{{< /cta >}}
-
 ---
 
 > Mari menjadi bagian dari generasi Qur’ani yang siap belajar, mengabdi, dan berkarya demi kemakmuran masjid dan kemaslahatan umat.
 
 `ASKA — Akademi Santri Karya Al-Fath`
 
-{{< content-image src="/images/notion/program/akademi-santri-karya-al-fath/3eb8dd44636a80289f32d41dead8b5a4.webp" alt="" size="100" >}}
+## Daftar Sekarang
+
+Isi Formilir dibawah ini:
+
+{{< tally id="q4q1Wd" >}}
